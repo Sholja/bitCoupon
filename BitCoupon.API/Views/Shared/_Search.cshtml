@@ -1,0 +1,97 @@
+﻿@model IEnumerable<BitCoupon.DAL.Models.Coupon>
+
+
+    @foreach (var item in Model)
+    {
+
+
+        <div class="col-md-4 col-sm-6">
+            <div class="blog-post">
+                @using (Html.BeginForm("SearchByCategory", "Coupons", new { id = item.CategoryId }, FormMethod.Get))
+                {
+                    <input type="submit" value="@item.Category.Name" class="btn-info btn-default" id="categoryBtn" />
+                }
+                <div class="blog-thumb" >
+                    <img id="couponPic" src="@item.PictureUrl" alt="" />
+                </div>
+                <div class="blog-content">
+                    <div class="content-show">
+                        <h4><a href="/Coupons/Details/@item.CouponId">@item.Name</a></h4>
+                        <span>DISCOUNT: @item.Discount % </span>
+                        <br />
+                        <span>PRICE: @item.Price km</span>
+
+
+                    </div>
+                    <div class="content-hide">
+                        <p>@item.DescriptionOnCoupon</p>
+                        <p>EXPIRES: @item.ExpirationTime.ToShortDateString()</p>
+                        @if (Session.Count > 0)
+                        {
+                            if ((bool)Session["Seller"] && (string)Session["UserId"]== item.ApplicationUserId)
+                            {
+                              <button id="deleteCoupon +'@item.CouponId" onclick="deleteCoupon(@item.CouponId)" class="btn btn-danger">Delete</button>
+                              <button id="editCoupon +'@item.CouponId " onclick="editCoupon(@item.CouponId)" class="btn btn-default">Edit</button>
+                            }
+                        }
+                        <button id="buyButton + '@item.CouponId" onclick="buyCoupon(@item.CouponId)" class="btn btn-primary" style=" float: right">Buy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    
+    }
+
+
+@*<script src="~/Scripts/main.js"></script>*@
+<script>
+    function buyCoupon(item) {
+
+        var id = item;
+        console.log(id);
+        $.ajax({
+            url: '/Coupons/BuyCoupon/' + id,
+            headers: { "Authorization": "Bearer " + sessionStorage.getItem('tokenKey') }
+        }).success(function (response) {
+            bootbox.dialog({ message: response });
+       
+            $('#buyFrom').submit(function (event) {
+                event.preventDefault();
+
+                $.ajax({
+                    url: '/Coupons/BuyCoupon',
+                    method: 'post',
+                    data: $(this).serialize(),
+                    headers: { "Authorization": "Bearer " + sessionStorage.getItem('tokenKey') }
+                }).success(function (response) {
+                    $.ajax({
+                        url: '/Coupons/Index'
+                    }).success(function (response) {
+                        bootbox.hideAll();
+                        bootbox.alert("Thank you for your purchase!");
+                    }).error(function (response) {
+                        bootbox.alert("There was an error.");
+                    })
+
+                }).error(function (response) {
+                    bootbox.alert(response.responseText);
+                });
+            });
+        }).error(function (response) {
+            $.ajax({
+                url: '/Home/IsLoggedIn'
+            }).success(function (response) {
+                bootbox.alert("Only buyers can buy coupons.");
+            }).error(function (response) {
+                $.ajax({
+                    url: '/AccountMvc/RegisterOnBuy'
+                }).success(function (response) {
+                    bootbox.dialog({ message: response });
+                }).error(function (response) {
+                    bootbox.alert(response.responseText);
+                });
+            });
+        })
+    }
+</script>

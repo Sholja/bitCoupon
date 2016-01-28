@@ -1,0 +1,54 @@
+﻿@model BitCoupon.DAL.Models.Avatar
+
+@{
+    Layout = null;
+}
+
+<img src="@Model.PictureUrl" alt="" />
+
+<form id="deleteAvatar" action="@Url.Action("Delete", new { Id = Model.Id })" method="post">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    <input type="submit" class="btn btn-danger" value="Delete" />
+    <button class="btn btn-primary" onclick="closeBootbox()">Close</button>
+</form>
+
+
+
+<script>
+    function closeBootbox()
+    {
+        bootbox.hideAll();
+    }
+
+    $(document).ready(function () {
+        $('#deleteAvatar').submit(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            $.ajax({
+                url: $(this).attr("action"),
+                method: 'post'
+            }).success(function (response) {
+                window.location.reload();
+            }).error(function (response) {
+                bootbox.alert(response.status);
+            })
+
+            return false;
+        });
+    });
+
+    function deleteAavatar(id)
+    {
+        $.ajax({
+            url: '/Avatars/Delete/' + id,
+            method: 'post'
+        }).success(function (response) {
+            window.location.reload();
+        }).error(function (response) {
+            bootbox.alert(response.status);
+        })
+      
+    }
+</script>

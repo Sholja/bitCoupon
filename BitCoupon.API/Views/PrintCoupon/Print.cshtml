@@ -1,0 +1,92 @@
+﻿@model BitCoupon.DAL.Models.Item
+@{
+    Layout = null;
+}
+
+
+
+
+<div class="coup-print" style="width: 80px; height: 80px; float: right">
+    <img src="/Images/logoPrint.png" />
+
+</div>
+    <div style="position: absolute; top: 20%;">
+
+
+
+    <div class="product-title">
+        <h2 class="coupon-name"> Coupon Name: <b>@Model.Coupon.Name</b></h2>
+        <span class="subtitle"></span>
+    </div>
+
+    <div class="price">
+        <h4>Old Price: $@Model.Coupon.Price  </h4>
+    </div>
+
+    <div class="price">
+        <h4>New Price: $@Model.Coupon.NewPrice </h4>
+    </div>
+
+    <div class="price">
+        <h4>Verification Code: @Model.VerificationId </h4>
+    </div>
+
+        <div class="price">
+            <h4>Expiration Time: @Model.Coupon.ExpirationTime </h4>
+        </div>
+
+
+</div>
+        <div class="timePrint">
+
+            <p style="float: right; padding-top: 55%"> @DateTime.Now.ToString("dd-MM-yyyy")</p>
+
+        </div>
+
+
+   
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+@Scripts.Render("~/bundles/jquery")
+<script>
+
+    $(document).ready(function () {
+        window.print();
+    });
+
+    //$("#coup-printBtn").click(function () {
+        
+    //        //var w = window.open();
+    //        //var html = $("#form").html();
+    //        //w.document.write(html);
+    //    window.print();
+    //    });
+
+        //treba da ispise ime kupona ime sellera cijena popust dan kad je kupio logo
+
+
+    </script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+

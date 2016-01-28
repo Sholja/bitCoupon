@@ -1,0 +1,80 @@
+﻿@model IEnumerable<BitCoupon.DAL.Models.Coupon>
+
+@if (Model.Count() != 0)
+{
+    <br />
+    @*<div class="row" id="curosel">
+            <div class="col-md-12 ">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+
+                    <div class="carousel-inner">
+
+                        <div class="item active">
+
+                            <img class="slide-image" src="@Url.Content(Model.ElementAt(0).PictureUrl)" alt="">
+                        </div>
+
+                        @for (int i = 1; i < Model.Count(); i++)
+                        {
+
+                            <div class="item">
+                                <img class="slide-image" src="@Url.Content(Model.ElementAt(i).PictureUrl)" alt="">
+                            </div>
+                        }
+
+                    </div>
+
+                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+
+                </div>
+            </div>
+
+        </div>*@
+
+    <div id="slider">
+        <div class="flexslider">
+            <ul class="slides">
+                @foreach (var item in Model)
+                {
+
+                    <li>
+                        <div class="slider-caption">
+                            <h1>@item.Name</h1>
+                            <p>
+                                @item.DescriptionOnCoupon
+                                <br><br>eget tellus luctus fermentum.
+                            </p>
+                            <span class="hidden">@item.CouponId</span>
+                            <button ng-non-bindable onclick="buyCoupon(this)" class="btn btn-warning" style="zoom:150%">Buy</button>
+                                    
+                            
+                        </div>
+                        <img src="@item.PictureUrl" />
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+}
+
+
+
+
+<script>
+
+    //Start new Carousel
+
+
+
+
+
+
+</script>

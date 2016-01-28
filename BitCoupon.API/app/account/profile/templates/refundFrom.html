@@ -1,0 +1,35 @@
+﻿
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true" ng-controller="BuyerInfoCtrl as ctrl">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Refund period for this purchase has expired, please fill this form to request refund.</h3>
+            </div>
+            <div class="modal-body">
+                <div class="container body-content">
+                    <div class="col-md-7 all-coupons">
+
+                        <form ng-submit="ctrl.service.requestRefund()" novalidate>
+                            <h3><span style="color:red">*</span>Why are you requesting refund?</h3>
+                            <select ng-model="ctrl.service.refundForm.Option" ng-required="true">
+                                <option value="I am unhappy about services of this coupon(s) seller">I am unhappy about services of this coupon(s) seller</option>
+                                <option value="I needed to travel out of the country, so I was unable to use coupon">I needed to travel out of the country, so I was unable to use coupon</option>
+                                <option value="It appears that I have been billed more then once for my purchase">It appears that I have been billed more then once for my purchase</option>
+                                <option value="I have not received my coupon yet">I have not received my coupon yet</option>
+                                <option value="I have not received item(s) which I have supposed to receive with this coupon(s)">I have not received item(s) which I have supposed to receive with this coupon(s)</option>
+                                <option value="Other">Other</option>
+                            </select>
+
+                            <br />
+                            <h4> Feel free to add any other comments or reasons for your refund: </h4>
+                            <div>
+                                <textarea class="coup-feedback-content" ng-model="ctrl.service.refundForm.Content" ng-maxlength="500"></textarea>
+                            </div>
+                            <input type="submit" value="Send" class="btn btn-success" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

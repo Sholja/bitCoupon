@@ -1,0 +1,66 @@
+﻿@model IEnumerable<BitCoupon.DAL.Models.Message>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+<br />
+
+<div id="content col-md-3" class="span10">
+
+
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a href="/Home/Index">Home</a>
+            <i class="icon-angle-right"></i>
+        </li>
+        <li><a href="#">System Messages</a></li>
+    </ul>
+
+    <div class="row-fluid">
+
+        <div class="span7">
+            <h1>Inbox</h1>
+
+            <ul class="messagesList">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <span class="from">
+                            <span><strong>Sender:</strong> @item.Sender</span>
+
+                        </span><span class="title" onclick="readMessage(@item.Id)"> <strong>Content:</strong> @item.Content</span><span class="date">@item.Time.Date <b>@item.Time.TimeOfDay</b></span>
+            </li>
+
+                }
+            </ul>
+
+        </div>
+        
+
+               
+
+            </div>
+
+        </div>
+
+
+
+
+<script>
+    function readMessage(item)
+    {
+        var id = item;
+
+        $.ajax({
+            url: '/Messages/Details/' + id 
+        }).success(function (response) {
+            bootbox.dialog({ message: response });
+
+        }).error(function (response) {
+            bootbox.alert(response.statusText);
+        });
+    }
+</script>

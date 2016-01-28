@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitCoupon.DAL", "BitCoupon.DAL\BitCoupon.DAL.csproj", "{A8B87797-3AE9-43BA-BBAC-6A697AEE83DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitCoupon.MVC", "BitCoupon.MVC\BitCoupon.MVC.csproj", "{CA0C0E54-6C5C-4E3C-840F-5B39B54A9DE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitCoupon.API", "BitCoupon.API\BitCoupon.API.csproj", "{54172873-F9D6-4C23-992A-19E1114885EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitCouponTest", "BitCouponTest\BitCouponTest.csproj", "{01C4DFCD-653C-431B-8D1B-9AA59F5F8A01}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://bitcamptfs.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = BitCoupon.DAL\\BitCoupon.DAL.csproj
+		SccProjectName1 = BitCoupon.DAL
+		SccLocalPath1 = BitCoupon.DAL
+		SccProjectUniqueName2 = BitCoupon.MVC\\BitCoupon.MVC.csproj
+		SccProjectName2 = BitCoupon.MVC
+		SccLocalPath2 = BitCoupon.MVC
+		SccProjectUniqueName3 = BitCoupon.API\\BitCoupon.API.csproj
+		SccProjectName3 = BitCoupon.API
+		SccLocalPath3 = BitCoupon.API
+		SccProjectUniqueName4 = BitCouponTest\\BitCouponTest.csproj
+		SccProjectName4 = BitCouponTest
+		SccLocalPath4 = BitCouponTest
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8B87797-3AE9-43BA-BBAC-6A697AEE83DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8B87797-3AE9-43BA-BBAC-6A697AEE83DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8B87797-3AE9-43BA-BBAC-6A697AEE83DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8B87797-3AE9-43BA-BBAC-6A697AEE83DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA0C0E54-6C5C-4E3C-840F-5B39B54A9DE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA0C0E54-6C5C-4E3C-840F-5B39B54A9DE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA0C0E54-6C5C-4E3C-840F-5B39B54A9DE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA0C0E54-6C5C-4E3C-840F-5B39B54A9DE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54172873-F9D6-4C23-992A-19E1114885EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54172873-F9D6-4C23-992A-19E1114885EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54172873-F9D6-4C23-992A-19E1114885EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54172873-F9D6-4C23-992A-19E1114885EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01C4DFCD-653C-431B-8D1B-9AA59F5F8A01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01C4DFCD-653C-431B-8D1B-9AA59F5F8A01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01C4DFCD-653C-431B-8D1B-9AA59F5F8A01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01C4DFCD-653C-431B-8D1B-9AA59F5F8A01}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,339 @@
+﻿
+<!DOCTYPE html>
+<html ng-app="bitCouponApp">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <meta charset="utf-8">
+
+
+
+    <meta name="generator" content="#" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   
+    <title>@ViewBag.Title</title>
+   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>   
+    <link rel="shortcut icon" href="#">
+    <link rel="apple-touch-icon" href="#">
+    <link rel="apple-touch-icon" sizes="72x72" href="#">
+    <link rel="apple-touch-icon" sizes="114x114" href="#">
+   
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/theme/css")
+   
+
+
+
+</head>
+<body>
+    <div class="site-wrapper animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
+        @*<div id="top-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="home-account">
+                                <div class="coup-login" ng-controller="LoginController as loginCtrl">
+                                    <div ng-show="loginCtrl.service.isLoggedIn">
+                                        <a ng-show="loginCtrl.service.user.Role === 'Buyer'" style="float:right" ui-sref="cart">
+                                            <ngcart-summary></ngcart-summary>
+                                        </a>
+                                        <a ui-sref-active="active"
+                                           data-template-url="/app/account/profile/templates/buyerInfo.html"
+                                           data-placement="right"
+                                           data-animation="am-slide-right"
+                                           bs-aside="aside"
+                                           data-container="body">{{loginCtrl.service.username}}</a>
+                                        <a ng-click="loginCtrl.service.logout()" ui-sref-active="active" ui-sref="index"> Logout</a>
+                                    </div>
+                                    <div ng-hide="loginCtrl.service.isLoggedIn">
+                                        <a ng-click="loginCtrl.service.showRegister()"> Register </a>
+                                        <a ng-click="loginCtrl.service.showLogin()"> Login </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>*@
+
+
+        @*<div id="main-header">
+                <div class=" container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            @*<div class="logo">
+                                <a href="/"><img src="~/Images/signature.png" title="Grill Template" alt="Grill Website Template"></a>
+                            </div>
+                        </div>
+                    </div>*
+
+
+            <div class="coup-header col-md-12" ng-controller="LoginController as loginCtrl">
+                <div class="main-menu">
+                    <ul>
+                        @*<li><a ui-sref="index" ui-sref-active="active">Home</a></li>
+                            <li><a ui-sref="expiredcoupons">Expired Coupons</a></li>
+                        <li ng-show="loginCtrl.service.user.Role === 'Seller'"><a ui-sref="createCoupon"> Add Coupon </a></li>
+                        <li ng-show="loginCtrl.service.user.Role === 'Seller'"><a ui-sref="categories"> Add Category </a></li>
+                        <li></li>
+                        <li>
+                            <coup-coupons-search>
+
+                            </coup-coupons-search>
+                        </li>
+                    </ul>
+                </div>
+            </div>*@
+        <header>
+            <div class="top-bar bg-light hdden-xs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 list-inline list-unstyled no-margin hidden-xs">
+                            <p class="no-margin">
+                                Have any questions?
+                                <strong>
+
+                                    bitcouponnoreply@gmail.com
+                                </strong>
+                            </p>
+                        </div>
+                        <div class="pull-right col-sm-6" ng-controller="LoginController as loginCtrl">
+                            <ul ng-if="loginCtrl.service.isLoggedIn" class="list-inline list-unstyled pull-right">
+
+                                <li style="cursor:pointer" class="">
+                                    <a ui-sref="profile">{{loginCtrl.service.username}}</a>
+
+                                </li>
+                             
+
+
+                                <li class="">   <a ng-click="loginCtrl.service.logout()" ui-sref-active="active" ui-sref="index"> Logout</a></li>
+                              
+
+                                <li class="" style="float: left;" ng-show="loginCtrl.service.user.Role === 'Buyer'">
+                                    <a ui-sref="cart">
+                                        <ngcart-summary></ngcart-summary>
+                                    </a>
+                                </li>
+                               
+                            </ul>
+                            <ul ng-if="!loginCtrl.service.isLoggedIn" class="list-inline list-unstyled pull-right">
+                                <li>      <a href="" ng-click="loginCtrl.service.showRegister()"> Register </a></li>
+                                <li>    <a href="" ng-click="loginCtrl.service.showLogin()"> Login </a></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="nav-wrap">
+                <div class="nav-wrap-holder">
+                    <div class="container" id="nav_wrapper">
+                        <nav class="navbar navbar-static-top nav-white" id="main_navbar" role="navigation">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#Navbar">
+                                    <span class="sr-only">
+                                        Toggle navigation
+                                    </span>
+                                    <span class="icon-bar">
+                                    </span>
+                                    <span class="icon-bar">
+                                    </span>
+                                    <span class="icon-bar">
+                                    </span>
+                                </button>
+                                <a ui-sref="index" class="navbar-brand logo col-sm-3">
+                                    <img src="images/logo.png" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse" id="Navbar">
+                                <!-- regular link -->
+                                <ul class="nav navbar-nav navbar-right" ng-controller="LoginController as loginCtrl">
+                                    <li class="dropdown">
+                                        <a ui-sref="index" ui-sref-active="active">Home</a>
+
+
+                                    </li>
+                                    <li class="dropdown">
+                                        <a ui-sref="expiredcoupons">Expired Coupons</a>
+
+                                    </li>
+
+
+                                    <li ng-show="loginCtrl.service.user.Role === 'Seller'"><a ui-sref="createCoupon"> Add Coupon </a></li>
+                                    <li ng-show="loginCtrl.service.user.Role === 'Seller'"><a ui-sref="categories"> Add Category </a></li>
+
+                                    <li class="dropdown">
+                                        <a ui-sref="aboutUs">About Us</a>
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+                <!-- /.div nav wrap holder -->
+            </div>
+
+        </header>
+        <div class="search-form bg-white">
+            <div class="container">
+                <div class="row">
+                    <coup-coupons-search>
+
+                    </coup-coupons-search>
+
+                </div>
+            </div>
+        </div>
+
+
+
+                  
+                        <div>
+                            @RenderBody()
+                            
+
+                        </div>
+    </div>
+
+    <footer id="footer">
+        <div class="container">
+            <div class="col-sm-12">
+                @Html.Partial("_FeedbackPartial")
+            </div>
+
+            @*<div class="col-sm-4 col-sm-offset-2">
+                <img src="images/logo.png" alt="#" class="img-responsive logo">
+                <p>
+                    Kupon,travel deals &amp; publishing,with minimal design. We provide you with the latest fresh inspiration straight from the
+                    industrie.
+                </p>
+            </div>
+                       
+            <div class="col-sm-4 col-sm-offset-2">
+                <h5>
+                    ABOUT US
+                </h5>
+                <ul class="list-unstyled">
+                    <li>
+                        Available Jobs
+                    </li>
+                    <li>
+                        Sumbit Deal
+                    </li>
+                    <li>
+                        Contact Us
+                    </li>
+                    <li>
+                        History
+                    </li>
+                    <li>
+                        Impressium
+                    </li>
+                </ul>
+            </div>*@
+
+
+           
+
+        </div>
+        <div class="btmFooter">
+            <div class="container">
+                <div style="text-align:center" class="col-sm-12">
+                    <p>
+                        <strong>
+                            Copyright 2015
+                        </strong> Kupon- deals and Coupons template made with
+                        <i class="ti-heart">
+                        </i>
+                        <strong>
+                            by Codenpixel
+                        </strong>
+                    </p>
+                </div>
+               
+            </div>
+        </div>
+        <style>
+            .my-drop-zone {
+                border: dotted 3px lightgray;
+            }
+
+            .nv-file-over {
+                border: dotted 3px red;
+            }
+            /* Default class applied to drop zones on over */
+            .another-file-over-class {
+                border: dotted 3px green;
+            }
+
+            html, body {
+                height: 100%;
+            }
+
+            #canvas {
+                background-color: #f3f3f3;
+                -webkit-box-shadow: 3px 3px 3px 0 #e3e3e3;
+                -moz-box-shadow: 3px 3px 3px 0 #e3e3e3;
+                box-shadow: 3px 3px 3px 0 #e3e3e3;
+                border: 1px solid #c3c3c3;
+                height: 100px;
+                margin: 6px 0 0 6px;
+            }
+        </style>
+
+    </footer>   
+
+
+
+
+
+
+
+
+
+                @Scripts.Render("~/bundles/jquery")
+
+
+
+                @Scripts.Render("~/bundles/bootstrap")
+                @Scripts.Render("~/bundles/theme")
+                @Scripts.Render("~/Carousel")
+                @RenderSection("scripts", required: false)
+                @Scripts.Render("~/bundles/angular")
+                @Scripts.Render("~/bundles/angular/coupons")
+                @Scripts.Render("~/bundles/angular/curosel")
+                @Scripts.Render("~/bundles/angular/comments")
+                @Scripts.Render("~/bundles/angular/account")
+                @Scripts.Render("~/bundles/angular/feedback")
+                @Scripts.Render("~/bundles/flow")
+                @Scripts.Render("~/theme/scripts")
+
+
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=true&quot; type='text/javascript'"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

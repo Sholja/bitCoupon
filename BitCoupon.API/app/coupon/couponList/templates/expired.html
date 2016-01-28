@@ -1,0 +1,39 @@
+﻿<div class="container" id="inner-page">
+
+<div class="row">
+    <div class="col-sm-12 clearfix">
+        <div class="hr-link">
+            <hr class="mBtm-50 mTop-30" data-symbol="EXPIRED COUPONS">
+        </div>
+    </div>
+</div>
+
+    <div id="latest-blog">
+
+
+
+        <div class="row">
+            <div id="couponPlace">
+                <!--- Start of coupons list directive-->
+                <coup-expired-coupon>
+
+                </coup-expired-coupon>
+                <!--- End of coupons list directive-->
+            </div>
+        </div>
+        <div class="row">
+            <button class="btn btn col-md-offset-4 col-md-4 PaginationButton"
+                    ng-disabled="!search.serviceSearch.hasNextExpired"
+                    ng-click="search.serviceSearch.getExpiredCoupons()">
+                More...
+            </button>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+
+

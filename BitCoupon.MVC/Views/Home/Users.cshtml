@@ -1,0 +1,131 @@
+﻿@model IEnumerable<BitCoupon.DAL.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Users";
+}
+
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-header" data-original-title>
+            <h2><i class="halflings-icon user"></i><span class="break"></span>Members</h2>
+            <div class="box-icon">
+                <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+            </div>
+        </div>
+        <div class="box-content">
+            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Role</th>
+                        <th>Change Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Role)
+                        </td>
+                        <td class="center">
+                            <div class="form-group">
+
+                                <div class="col-md-8" style="width:126px">
+                                    @Html.DropDownList("RoleId", null, htmlAttributes: new { @class = "form-control", @id = "newRole" + @item.Id })
+                                    @Html.ValidationMessageFor(model => item.Roles.ElementAt(0).RoleId, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            </td>
+                        <td>
+                            <a href="#" class="btn btn-info" onclick="assigne('@item.Id')">
+                                <i class="halflings-icon white edit"></i> Assign
+                            </a>
+                            <a href="#" class="btn btn-danger" onclick="deleteUser('@item.Id')">
+                                <i class="halflings-icon white trash"></i> Delete
+                            </a>
+                        </td>
+
+                        
+
+                        
+                    </tr>
+             
+                }
+
+            </table>
+        </div>
+    </div><!--/span-->
+
+</div><!--/row-->
+
+@section scripts{
+
+    <script>
+
+        function assigne(item) {
+            var data = {
+                UserId: item,
+                newRole: $('#newRole'+ item).val() 
+
+            }
+            console.log(data);
+            $.ajax({
+                url: '/Account/AssigneRole',
+                method: 'post',
+                data: data
+            }).success(function (response) {
+                window.location.href = "/Home/Users";
+            }).error(function (response) {
+                alert("Error.");
+            })
+        }
+
+        function deleteUser(item) {
+            var data = {
+                UserId: item
+            }
+            $.ajax({
+                url: '/Account/Delete',
+                method: 'post',
+                data: data
+            }).success(function (response) {
+                window.location.href = "/Home/Users";
+            }).error(function (response) {
+                if (response.status == 403)
+                {
+                    bootbox.alert("You don't have permission to delete this user.");
+                }
+                else if (response.status == 400)
+                {
+                    bootbox.alert("You can't delete yourself.");
+                }
+                else if (response.status == 409)
+                {
+                    bootbox.alert("This user can't be deleted.");
+                }
+                else
+                {
+                    bootbox.alert("There was a problem with server, please try again later.");
+                }
+            })
+        }
+
+    </script>
+
+}
+

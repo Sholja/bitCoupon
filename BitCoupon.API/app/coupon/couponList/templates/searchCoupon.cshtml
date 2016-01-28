@@ -1,0 +1,18 @@
+﻿
+
+<div class="col-md-6" style="float:right;">
+    <div class="col-sm-4">
+            <input class="form-control" style="margin:0;" placeholder="Coupon Name" type="text" ng-model="search.serviceSearch.search">
+    </div>
+    <!-- /. col 3 -->
+    <div class="col-sm-4">
+        <select class="form-control sm-margin-bottom-10" ng-model="search.serviceSearch.dropdown" ng-options="cat.Id as cat.Name for cat in search.serviceSearch.categoryList"></select>
+    </div>
+
+    <!-- /.col 3 -->
+    <div class="col-sm-4">
+        <a class="btn btn-raised ripple-effect btn-success btn-block" ng-click="search.searchBy()">
+            Search Deals
+        </a>
+    </div>
+</div>

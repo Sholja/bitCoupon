@@ -1,0 +1,694 @@
+﻿
+<div id="empty"></div>
+<div id="heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading-content">
+                    <h2>@Model.Coupon.Name</h2>
+
+
+                    <span><a href="~/Coupons/Index">Home</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="product-post">
+    <div class="container">
+        <div class="row>
+            <div class=" col-lg-12 col-md-12">
+            <div class="heading-section">
+
+                <img class="" src="~/Images/under-heading.png" alt="" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="single-blog" class="page-section first-section">
+    <div class="container">
+        <div class="row">
+            <div class="product-item col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="image">
+                            <div class="image-post">
+
+                                <!--start of courasel-->
+                                <div class="couraselCool">
+                                    <div id="wrapper">
+                                        <div class="col-lg-10 " id="inner">
+                                            <div id="carousel-wrapper">
+                                                <div id="carousel">
+
+                                                    <img src="@Url.Content(Model.Coupon.PictureUrl)" width="800" height="500" />
+                                                    @foreach (var item in Model.Coupon.Images)
+                                                    {
+                                                        <img src="@Url.Content(item.ImageUrl)" width="800" height="500" />
+                                                    }
+
+
+                                                </div>
+                                            </div>
+                                            <div id="pager-wrapper">
+                                                <div id="pager">
+
+                                                    <img src="@Url.Content(Model.Coupon.PictureUrl)" width="80" height="80" />
+
+                                                    @foreach (var item in Model.Coupon.Images)
+                                                    {
+                                                        <img src="@Url.Content(item.ImageUrl)" width="80" height="80" />
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-title">
+                            <h2 class="coupon-name"> <b>@Model.Coupon.Name</b></h2>
+                            <span class="subtitle"></span>
+                        </div>
+                        <p style="font-size: 20px "> @Model.Coupon.DescriptionOnSellerPage  </p>
+
+                        <!--Pocetak novog detailsa-->
+
+
+
+
+
+
+                        <div id="container">
+                            <h4 class="must-buy"> <a href="#"> MUST BUY!! </a> </h4>
+
+                            <div class="pricetab col-md-2">
+                                <div class="price">
+                                    <h4> NUMBER OF COUPONS: </h4>
+                                    @if (Model.Coupon.NuberOfCouponsToOfferManaged > 0)
+                                    {
+                                        <h2> @Model.Coupon.NuberOfCouponsToOfferManaged </h2>
+                                    }
+                                    else
+                                    {
+                                        <h3>PROPOSAL SUCCESSFUL</h3>
+                                    }
+                                </div>
+                                <div class="pricefooter">
+                                    <div class="button" id="buyButton + '@Model.Coupon.CouponId" onclick="buyCoupon(@Model.Coupon.CouponId)">
+                                        <h4 class="must-buy-2"> <a href="#"> BUY!! </a> </h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pricetab col-md-2" style="margin-top:40px;">
+                                <h4> COUPON DISCOUNT: </h4>
+                                <div class="price">
+                                    <h2> @Model.Coupon.Discount % </h2>
+                                </div>
+                                <div class="pricefooter">
+                                    <div class="button" id="buyButton + '@Model.Coupon.CouponId" onclick="buyCoupon(@Model.Coupon.CouponId)">
+                                        <h4 class="must-buy-2"> <a href="#"> BUY!! </a> </h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pricetab col-md-2" style="margin-top:80px;">
+                                <div class="pricetabmid">
+                                    <h4> COUPONS LEFT: </h4>
+                                    <div class="pricemid">
+                                        <h2> @Model.Coupon.TotalNumberOfCoupons </h2>
+                                    </div>
+                                    <div class="pricefootermid">
+                                        <div class="buttonmid" id="buyButton + '@Model.Coupon.CouponId" onclick="buyCoupon(@Model.Coupon.CouponId)">
+                                            <h4 class="must-buy-2"> <a href="#"> BUY!! </a> </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pricetab col-md-3" style="margin-top:120px;">
+                                <h4> COUPON EXPIRES: </h4>
+                                <div class="price">
+                                    <h2>@Model.Coupon.ExpirationTime.ToShortDateString()</h2>
+                                </div>
+                                <div class="pricefooter">
+                                    <div class="button" id="buyButton + '@Model.Coupon.CouponId" onclick="buyCoupon(@Model.Coupon.CouponId)">
+                                        <h4 class="must-buy-2"> <a href="#"> BUY!! </a> </h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pricetab col-md-2" style="margin-top:160px;">
+                                <h4> COUPON PRICE: </h4>
+                                <div class="price">
+                                    <h2> @Model.Coupon.Price KM </h2>
+                                </div>
+                                <div class="pricefooter">
+                                    <div class="button" id="buyButton + '@Model.Coupon.CouponId" onclick="buyCoupon(@Model.Coupon.CouponId)">
+                                        <h4 class="must-buy-2"> <a href="#"> BUY!! </a> </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="visit-site col-lg-12" style="font-size: 30px; padding-top:5%;">Visit our site : <a style="font-size: 25px;" href="http://@Model.Coupon.SellerUrl" target="_blank">@Model.Coupon.SellerUrl</a></p>
+
+                        </div>
+
+
+
+
+
+
+
+                        <!--Kraj novog detailsa-->
+                        <!--
+                            end of courasel
+                            start of model info
+                        -->
+                        @*<div class="divide-line">
+                                <img src="/Images/div-line.png" alt="" />
+                            </div>*@
+
+                        <!--
+                            end of model info section
+                        -->
+                        <div class="googleMaps col-lg-12">
+
+                            <div id="googleMap" style="width:100%;height:350px;"></div>
+                        </div>
+                        <!--
+                            begg of comments section
+
+                        -->
+
+                        <div class=" col-lg-12 col-md-12">
+                            <div class="heading-section">
+                                <h2>add a comment</h2>
+                                <img class="" src="~/Images/under-heading.png" alt="" />
+                            </div>
+
+
+
+                            <div class="col-lg-12">
+                                <h6 style="color:#ff6a00; float: left">@Model.Comments.Count comments</h6>
+                            </div>
+
+
+                            <div class="col-lg-12 commentsDiv">
+
+                                <form id="CreateComment">
+                                    @Html.HiddenFor(model => model.Coupon.CouponId, new { id = "couponId" })
+                                    <input type="submit" value="create" onclick="createCommentary(@Model.Coupon.CouponId)" />
+                                    <input type="text" name="Content" id="Content" />
+
+                                </form>
+
+                            </div>
+                            <div id="comment" class="col-lg-12">
+                                @foreach (var item in Model.Comments)
+                                {
+                                    <div class="view-comments">
+                                        <div class="comments">
+
+                                            <div class="comment-body">
+                                                <h6 class="col-lg-12">@item.ApplicationUser.UserName</h6>
+
+                                                <span class="date col-lg-12">@DateTime.Now</span>
+                                                <p id="postComment" class="col-lg-12"><h4>@item.Content</h4></p>
+                                                @if (Session.Count > 0)
+                                                {
+                                                    if ((bool)Session["Buyer"]/* && (string)Session["UserId"] == Model.Coupon.ApplicationUserId*/)
+                                                    {
+                                                        <div class="col-lg-5 col-lg-offset-2">
+                                                            <input class="btn btn-danger col-lg-3" type="button" name="Delete" value="Delete" onclick="DeleteComment(@item.CommentId,@item.CouponId)" />
+                                                        </div>
+                                                    }
+                                                    else if ((bool)Session["Admin"] || (bool)Session["SuperAdmin"])
+                                                    {
+                                                        <div class="col-lg-5 col-lg-offset-2">
+                                                            <input class="btn btn-danger col-lg-3" type="button" name="Delete" value="Delete" onclick="DeleteComment(@item.CommentId,@item.CouponId)" />
+                                                        </div>
+                                                    }
+                                                }
+                                                <div class="col-lg-5 col-lg">
+                                                    <input class="btn btn-danger col-lg-3" type="button" name="Report" value="Report" onclick="reportComment(@item.CommentId,@item.CouponId)" />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                }
+                            </div>
+                            <!--
+                            end of comments section
+
+                            -->
+                            <!--
+                            start of side bar
+                               -->
+                            <div id="empty"></div>
+                        </div>
+
+                        @*<div class="col-md-3 col-md-offset-1">
+                                <div class="side-bar">
+                                    <div class="news-letters">
+                                        <h4>Coupons</h4>
+                                        <img src="@Url.Content(Model.Coupon.PictureUrl)" width="200" height="100" />
+                                    </div>
+
+                                    <div class="recent-post">
+                                        <h4>Recent Comments</h4>
+                                        <div class="posts">
+                                            <div class="recent-post">
+
+                                                @foreach (var item in Model.Comments)
+                                                {
+                                                    if (item.CommentId < 16)
+                                                    {
+                                                        <h4 style="color:#4a1f1f">@item.Content</h4>
+                                                        <div class="recent-post-info">
+
+                                                            <span style="color:burlywood">@DateTime.Now.DayOfWeek</span>
+                                                        </div>
+                                                    }
+
+
+
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>*@
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    @if (Session.Count == 0)
+    {
+        @*<h5 style="color:red">
+                You need to be logged in to buy and comment coupon
+            </h5>*@
+    }
+</div>
+
+@section Scripts{
+
+    <script>
+
+        $(function () {
+            var $carousel = $('#carousel'),
+                $pager = $('#pager');
+
+            function getCenterThumb() {
+                var $visible = $pager.triggerHandler('currentVisible'),
+                    center = Math.floor($visible.length / 2);
+
+                return center;
+            }
+
+            $carousel.carouFredSel({
+                responsive: true,
+                items: {
+                    visible: 1,
+                    width: 800,
+                    height: (500 / 800 * 100) + '%'
+                },
+                scroll: {
+                    fx: 'crossfade',
+                    onBefore: function (data) {
+                        var src = data.items.visible.first().attr('src');
+                        src = src.split('/large/').join('/small/');
+
+                        $pager.trigger('slideTo', ['img[src="' + src + '"]', -getCenterThumb()]);
+                        $pager.find('img').removeClass('selected');
+                    },
+                    onAfter: function () {
+                        $pager.find('img').eq(getCenterThumb()).addClass('selected');
+                    }
+                }
+            });
+            $pager.carouFredSel({
+                width: '100%',
+                auto: false,
+                height: 120,
+                items: {
+                    visible: 'odd'
+                },
+                onCreate: function () {
+                    var center = getCenterThumb();
+                    $pager.trigger('slideTo', [-center, { duration: 0 }]);
+                    $pager.find('img').eq(center).addClass('selected');
+                }
+            });
+            $pager.find('img').click(function () {
+                var src = $(this).attr('src');
+                src = src.split('/small/').join('/large/');
+                $carousel.trigger('slideTo', ['img[src="' + src + '"]']);
+            });
+        });
+
+    </script>
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+
+
+
+
+
+    <script>
+        $(document).ready(function () {
+            var id = $("#couponId").val();
+            console.log(id);
+            $.ajax({
+                url: "/GoogleApis/GetLocation/" + id
+            }).success(function (response) {
+                console.log(response);
+                myLoc = response;
+
+
+            }).error(function (response) {
+
+            });
+
+
+        });
+        var myLoc = [];
+        var map;
+        var myCenter = new google.maps.LatLng(43.89789239125797, 18.419952392578125);
+        var geocoder;
+
+        setTimeout(function () { initialize(); }, 2000);
+
+        function initialize() {
+
+            var mapProp = {
+                center: myCenter,
+                zoom: 8,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+            geocoder = new google.maps.Geocoder;
+
+            for (var i = 0; i < myLoc.length; i++) {
+
+                var location = {
+                    lat: parseFloat(myLoc[i].Lang.replace(',', '.')),
+                    lng: parseFloat(myLoc[i].Long.replace(',', '.'))
+                }
+
+                var infowindow = new google.maps.InfoWindow;
+                geocodeLatLng(location, infowindow);
+            }
+
+        }
+        function geocodeLatLng(location, infowindow) {
+
+            geocoder.geocode({ 'location': location }, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        map.setZoom(11);
+                        var marker = new google.maps.Marker({
+                            position: location,
+                            map: map
+                        });
+                        infowindow.setContent(results[1].formatted_address);
+                        infowindow.open(map, marker);
+                    } else {
+                        window.alert('No results found');
+                    }
+                } else {
+                    window.alert('Geocoder failed due to: ' + status);
+                }
+            });
+        }
+    </script>
+    <script src="~/Scripts/main.js"></script>
+    <script>
+        function buyCoupon(item) {
+
+            var id = item;
+            console.log(id);
+            $.ajax({
+                url: '/Coupons/BuyCoupon/' + id,
+                headers: { "Authorization": "Bearer " + sessionStorage.getItem('tokenKey') }
+            }).success(function (response) {
+                bootbox.dialog({ message: response });
+
+                $('#buyFrom').submit(function (event) {
+                    event.preventDefault();
+
+                    $.ajax({
+                        url: '/Coupons/BuyCoupon',
+                        method: 'post',
+                        data: $(this).serialize(),
+                        headers: { "Authorization": "Bearer " + sessionStorage.getItem('tokenKey') }
+                    }).success(function (response) {
+                        $.ajax({
+                            url: '/Coupons/Index'
+                        }).success(function (response) {
+                            bootbox.hideAll();
+                            bootbox.alert("Thank you for your purchase!");
+                        }).error(function (response) {
+                            bootbox.alert("There was an error.");
+                        })
+
+                    }).error(function (response) {
+                        bootbox.alert("You don't have permission to go there.");
+                    });
+                });
+            }).error(function (response) {
+                bootbox.alert(response.responseText);
+            });
+        }
+    </script>
+
+    <script>
+
+        function createCommentary(id){
+
+            var comment = {
+                couponId: id,
+                content: $("#Content").val()
+            }
+
+            console.log(comment);
+
+            $.ajax({
+                url: '/Comments/Create',
+                method: 'post',
+                data: comment,
+                headers: { "Authorization": "Bearer " + sessionStorage.getItem('tokenKey') }
+            }).success(function(response){
+                window.location.href = "/Coupons/Details/" + id;
+            }).error(function(response){
+                var response = JSON.parse(error.responseText);
+                for (var i = 0; i < response.length; i++) {
+                    var error = response[i];
+                    var fieldKey = error.Key;
+                    var message = error.Message;
+
+                    console.log(fieldKey);
+
+                    $('input[name="' + fieldKey + '"]').parent().append('<span class="alert-danger" data-error >' + message + '</span>');
+                    $('textarea[name="' + fieldKey + '"]').parent().append('<span class="alert-danger" data-error >' + message + '</span>');
+                }
+            });
+        }
+
+
+        function DeleteComment(item, newItem) {
+            //coment id , coupon id
+            var id = item;
+
+            $.ajax({
+                url: "/Comments/Delete/" + id,
+                method: "get"
+
+
+            }).success(function (response) {
+
+                bootbox.dialog({
+                    message: response
+                });
+                $('#deleteComment').submit(function (event) {
+                    event.preventDefault();
+                    $.ajax({
+                        url: "/Comments/Delete/" + id,
+                        method: "post",
+                        headers: { "Authorization": "Bearer " + sessionStorage.getItem('tokenKey') }
+                    }).success(function (response) {
+                        bootbox.hideAll();
+                        id = newItem;
+                        console.log(id);
+                        window.location.href = "/Coupons/Details/" + id;
+                        console.log("redirectend");
+                        console.log(respones);
+                    }).error(function (response) {
+                        bootbox.hideAll();
+
+                        if (response.status === 401) {
+                            bootbox.alert("U need to be Administrator to delete comments");
+                        }
+                        else if (response.status === 403) {
+                            bootbox.alert("You cant delete that comment");
+                        }
+
+                    });
+
+                });
+
+
+            });
+        }
+
+
+    </script>
+    <script>
+        function reportComment(commentId, couponId) {
+
+            var id = commentId;
+            $.ajax({
+                url: '/Reports/AddReport/' + id,
+                headers: { "Authorization": "Bearer " + sessionStorage.getItem('tokenKey') }
+            }).success(function (response) {
+                bootbox.hideAll();
+                bootbox.confirm("You have reported this comment. Thank you for your support.", function () {
+                    window.location.href = "/Coupons/Details/" + couponId;
+                });
+            }).error(function (response) {
+                bootbox.alert("Either you have already reported this coupon or you haven't bought this coupon.");
+            });
+
+        }
+
+        $(document).ready(function () {
+
+            $(window).on('click', function () {
+                $("[data-error]").remove();
+            });
+
+            var files;
+
+            // Add events
+            $('input[type=file]').on('change', prepareUpload);
+
+            function prepareUpload(event) {
+                files = event.target.files;
+            }
+
+
+            // for any form on this page do the follofing
+            $('form').submit(function (e, options) {
+
+
+
+                //if options is not defined define it as a empty object
+                var options = options || {};
+
+                //if allow is true let the event propagate to the server
+                if (options.allow == true) {
+                    return;
+                }
+
+
+                //prevent submiting the form
+                e.preventDefault();
+
+                //clean all error messages
+                $("[data-error]").remove();
+
+                //get a refference to the current form
+                $form = $(this);
+
+                var data = new FormData($form[0]);
+
+                if (typeof files != 'undefined') {
+                    $.each(files, function (key, value) {
+                        data.append(key, value);
+                    });
+                }
+
+                $form.each(function () {
+                    var input = $(this);
+
+                    // This is the jquery object of the input, do what you will
+                    data.append(input.attr("name"), input.val());
+                });
+
+                var data1 = {
+                    couponId: $("#couponId").val(),
+                    content: $("#Content").val()
+                }
+                /*
+                 * This will setup a AJAX call, the params are
+                 * url: where to go
+                 * method: what kind of request
+                 * data: the data to add to the request
+                 */
+                $.ajax({
+                    url: $form.attr("action"),
+                    method: $form.attr("method"),
+                    data: data1,
+                    //cache: false,
+                    //contentType: false,
+                    //processData: false,
+                    headers: { "Authorization": "Bearer " + sessionStorage.getItem('tokenKey') }
+                }).success(function (response) {
+                    //if the validation did not return an error, triger the form submit with options.allow = true
+                    $form.trigger("submit", { allow: true });
+
+                }).error(function (error) {
+                    ////if we got a bad request we take the JSON object from the response
+                    //var errors = response.responseJSON;
+
+                    ////get an array of all the keys in the error object
+                    //var keys = Object.keys(errors);
+
+                    ////itterate over the keys
+                    //for (var i = 0; i < keys.length; i++) {
+
+                    //    //get the error messages for the current key (which represents one input field)
+                    //    var errorMessages = errors[keys[i]];
+                    //    //a string of all the errors for the current input
+                    //    var allErrors = "";
+                    //    for (var j = 0; j < errorMessages.length; j++) {
+                    //        allErrors += errorMessages[j];
+                    //    }
+
+                    //    $('input[name="' + keys[i] + '"]').parent().append('<span class="alert-danger" data-error >' + allErrors + '</span>')
+                    //}
+                    console.log(error);
+
+                    var response = JSON.parse(error.responseText);
+                    for (var i = 0; i < response.length; i++) {
+                        var error = response[i];
+                        var fieldKey = error.Key;
+                        var message = error.Message;
+                        console.log(fieldKey);
+                        console.log(message);
+                        $('input[name="' + fieldKey + '"]').parent().append('<span class="alert-danger" data-error >' + message + '</span>')
+                    }
+
+                });
+
+            });
+
+        });
+    </script>
+
+
+
+}

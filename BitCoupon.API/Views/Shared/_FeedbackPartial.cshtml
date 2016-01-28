@@ -1,0 +1,49 @@
+﻿
+<div ng-controller="FeedbackCtrl as feedCtrl" style="height:auto;">
+    <form ng-submit="feedCtrl.service.createFeedback()">
+        <hr data-symbol="Give Us Your Feedback" style="text-align:center">
+        <div class="col-sm-12">
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <div style="float:right; width:230px;">
+                    <p style="text-align:center; margin-bottom:0;"><span>*</span>Please fill in required fields</p>
+                    <div>
+                        <input style="margin-bottom: 0;" type="text" ng-model="feedCtrl.service.feedback.Name" placeholder="Name..." class="form-group" />
+                    </div>
+                    <div class="form-group">
+                        <input style="margin-bottom: 0;" type="email" ng-model="feedCtrl.service.feedback.Email"
+                               placeholder="*Email..."
+                               class="form-control" />
+
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-4 col-sm-12 col-xs-12">
+                <fieldset class="input-group">
+                    <p style="text-align:center"><span>*</span>How satisfied were you with our services:</p>
+                    <div style="display:table; margin:auto;">
+                        <input style="width:50px" type="radio" class="input-radio" name="ChackBox" value="Very Satisfied" ng-model="feedCtrl.service.feedback.ChackBox" />Very Satisfied
+                        <br />
+                        <input style="width:50px" type="radio" class="input-radio" name="ChackBox" value="Satisfied" ng-model="feedCtrl.service.feedback.ChackBox" />Satisfied
+                        <br />
+                        <input style="width:50px" type="radio" class="input-radio" name="ChackBox" value="Neutral" ng-model="feedCtrl.service.feedback.ChackBox" />Neutral
+                        <br />
+                        <input style="width:50px" type="radio" name="ChackBox" class="input-radio" id="radio4" value="Unsatisfied" ng-model="feedCtrl.service.feedback.ChackBox" />Unsatisfied
+                        <br />
+                        <input style="width:50px" type="radio" name="ChackBox" class="input-radio" id="radio5" value="Very Unsatisfied" ng-model="feedCtrl.service.feedback.ChackBox" />Very Unsatisified
+                        <br />
+                    </div>
+                </fieldset>
+                <br />
+            </div>
+            <p style="text-align:center;"><b> Feel free to add any other comments or suggestions:</b> </p>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <textarea style="margin-top:0;height:250px;" class="coup-feedback-content" ng-model="feedCtrl.service.feedback.FeedBackContent"></textarea>
+            </div>
+        </div>
+        <p style="text-align:center; margin-top:2%;">* The information given within the Feedback Form will be used for service improvement only and are strictly confidential. </p>
+        <input style="text-align:center; display:table; margin: 0 auto;" type="submit" class="btn btn-raised ripple-effect btn-success btn-block" value="Send" />
+    </form>
+</div>
+
+
+

@@ -1,0 +1,57 @@
+﻿
+
+
+<h3 class="coup-titles"> Register </h3>
+
+<div class="row">
+    <div class="col-md-6" ng-controller="RegisterController as registerCtrl">
+        <!-- Start of registration form -->
+        <form ng-submit="registerCtrl.register()" novalidate class="coup-forms">
+
+            <div class="form-group">
+
+                <input type="text" class="form-control" ng-required="true" ng-model="registerCtrl.user.FirstName" />
+                <label><span style="color:red">*</span>First Name: </label>
+
+                <input type="text" class="form-control" ng-required="true" ng-model="registerCtrl.user.LastName" />
+                <label><span style="color:red">*</span>Last Name: </label>
+
+                <input type="text" class="form-control" ng-required="true" ng-model="registerCtrl.user.Location" />
+                <label><span style="color:red">*</span>Location: </label>
+
+                <input type="text" class="form-control" ng-required="true" ng-model="registerCtrl.user.Address" />
+                <label><span style="color:red">*</span>Address: </label>
+
+                <input type="email" class="form-control" ng-required="true" ng-model="registerCtrl.user.Email" />
+                <label><span style="color:red">*</span>Email: </label>
+
+                <input type="password" class="form-control" ng-required="true" ng-pattern-err-type="invalidPassword" ng-model="registerCtrl.user.Password" pattern="(?=^.{6,}$)((?=.*\d)(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" />
+                <label><span style="color:red">*</span>Password: </label>
+
+                <input type="password" class="form-control" ng-required="true" ng-pattern-err-type="invalidPassword" ng-model="registerCtrl.user.ConfirmPassword" pattern="(?=^.{6,}$)((?=.*\d)(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" />
+                <label><span style="color:red">*</span>Confirm Password: </label>
+            </div>
+            <input type="submit" value="Register" class="btn btn-success btn-raised ripple-effect" style="width:19%;" />
+        </form>
+        <!-- End of registration form -->
+    </div>
+    <div class="col-md-6" ng-controller="LoginController as loginCtrl">
+        <h4>Already registered? Please, login here.</h4>
+        <form ng-submit="loginCtrl.login()" novalidate class="coup-forms">
+            <div class="form-group">
+
+                <input type="email" class="form-control" ng-required="true" ng-model="loginCtrl.user.Username" />
+                <label>Username: </label>
+
+                <input type="password" class="form-control" ng-required="true" ng-pattern-err-type="invalidPassword" ng-model="loginCtrl.user.Password" pattern="(?=^.{6,}$)((?=.*\d)(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" />
+                <label>Password: </label>
+
+            </div>
+            <input type="submit" value="Login" class="btn btn-success btn-raised ripple-effect coup-button-width" />
+        </form>
+
+    </div>
+</div>
+
+
+

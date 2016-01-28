@@ -1,0 +1,94 @@
+﻿@model IEnumerable<BitCoupon.DAL.Models.PayPalRefund>
+
+@{
+    ViewBag.Title = "Approved";
+}
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-header" data-original-title>
+            <h2><i class="halflings-icon user"></i><span class="break"></span>Not Approved Refunds</h2>
+            <div class="box-icon">
+                <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+            </div>
+        </div>
+        <div class="box-content">
+            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Reson for Refund</th>
+                        <th>Other Reasons</th>
+                        <th>Payment ID</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Option)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Content)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PaymentId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Finished)
+                        </td>
+                        <td>
+                            <a href="#" class="btn btn-info" onclick="approveRefund('@item.Id')">
+                                <i class="halflings-icon white edit"></i> Approve
+                            </a>
+                            <a href="#" class="btn btn-danger" onclick="declineRefund('@item.Id')">
+                                <i class="halflings-icon white trash"></i> Decline
+                            </a>
+                        </td>
+
+
+
+
+                    </tr>
+
+                }
+
+            </table>
+        </div>
+    </div><!--/span-->
+
+</div><!--/row-->
+
+<script>
+    function approveRefund(id)
+    {
+        $.ajax({
+            url: '/PayPalRefunds/Approve?id=' + id
+        }).success(function (response) {
+            bootbox.confirm("Refund approved.", function () {
+                window.location.reload();
+            });
+        }).error(function (response) {
+            bootbox.alert(response.statusText);
+        });
+    }
+
+    function declineRefund(id)
+    {
+        $.ajax({
+            url: '/PayPalRefunds/Decline?id=' + id
+        }).success(function (response) {
+            bootbox.confirm("Refund declined.", function () {
+                window.location.reload();
+            });
+        }).error(function (response) {
+            bootbox.alert(response.statusText);
+        });
+    }
+</script>

@@ -1,0 +1,96 @@
+﻿
+<div class="row">
+    <div class="col-sm-12 clearfix">
+        <div class="hr-link">
+            <hr class="mBtm-50 mTop-30" data-symbol="FEATURED DEALS">
+            
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 col-sm-12" ng-repeat="coupon in couponsCtrl.service.couponsList | filter : couponsCtrl.couponsList.searchBy">
+    <div class="deal-entry green">
+        <div class="offer-discount">
+           - {{(coupon.Price - coupon.NewPrice )/coupon.Price * 100 | number:0 }} %
+        </div>
+        <div class="image ripple-effect">
+            <a ui-sref="details({id: coupon.CouponId})"  title="{{coupon.Name}}">
+                <img ng-src="{{ coupon.PictureUrl}}" class="img-responsive">
+            </a>
+            <span class="bought">
+                <i class="ti-tag">
+                </i>
+                {{coupon.TotalNumberOfCoupons}}
+            </span>
+        </div>
+        <!-- /.image -->
+        <div class="title">
+            <a ui-sref="details({id: coupon.CouponId})" title="{{coupon.Name}}" >
+                <p style="font-size:22px;" class="truncate">
+                    {{coupon.Name}}
+                </p>
+            </a>
+        </div>
+        <div class="entry-content">
+            <div class="prices clearfix">
+                <div class="procent">
+                    - {{(coupon.Price - coupon.NewPrice )/coupon.Price * 100 | number:0 }} %
+                </div>
+                <div class="price">
+                    <b>
+                    $
+                       {{coupon.NewPrice | number:2}}
+                    </b>
+                </div>
+                <div class="old-price">
+                    <span>
+                        <i class="ti-money">
+                        </i>
+                       {{coupon.Price | number:2}}
+                    </span>
+                </div>
+            </div>
+            <p class="truncate">
+                {{coupon.DescriptionOnCoupon}}
+            </p>
+            <p class="time col-sm-7 col-xs-6 col-lg-8">
+                <i class="ti-timer">
+                </i>
+                Coupon expires
+                <b>
+                    {{ coupon.ExpirationTime | date:'dd-MM-yyyy' }}
+                </b>
+
+            </p>
+        </div>
+        <!--/.entry content -->
+        <footer class="info_bar clearfix">
+            <ul class="unstyled list-inline row col-md-10">
+              
+                <li>
+                    <a class="btn btn-block btn-default btn-raised btn-sm" ui-sref="details({id: coupon.CouponId})"> View Deal </a>
+                    </li>
+                <li  ng-if="couponsCtrl.accountService.user.Id == coupon.ApplicationUserId"><a ui-sref="editCoupon({ id: coupon.CouponId })" class="btn btn-block btn-default btn-raised btn-sm">Edit</a></li>
+                <li  ng-if="couponsCtrl.accountService.user.Role == 'Buyer'">
+                    <a style="cursor:pointer" class="btn btn-block btn-default btn-raised btn-sm">
+                        <ngcart-addtocart id="{{ coupon.CouponId }}" price="{{ coupon.NewPrice }}" name="{{ coupon.Name }}" data="coupon"> Add To Cart </ngcart-addtocart>
+                        <span class="link animate">
+                        </span>
+                    </a>
+                </li>
+                <li ng-if="couponsCtrl.accountService.user.Id == coupon.ApplicationUserId"> <a class="btn btn-block btn-default btn-raised btn-sm" ng-click="couponsCtrl.service.deleteCoupon($index)">Delete</a> </li>
+            </ul>
+
+
+
+
+
+
+            </footer>
+        </div>
+    </div>
+
+
+
+
+

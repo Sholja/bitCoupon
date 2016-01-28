@@ -1,0 +1,159 @@
+﻿<div id="inner-page">
+    <div class="container" style="background-color:white;">
+      
+        <hr class="mBtm-50 mTop-50" data-symbol="Add Locations">
+        <div class="row">
+            <div class="col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+                <div ng-controller="MapController as mapCtrl" class="col-md-11 col-sm-11 col-xs-11">
+                    <div>
+
+                    </div>
+                    <div id="googleMap" style="width:100%;height:380px;"></div>
+                    <br />
+                   
+                      
+                    <div style="float:right">
+                        <button ng-click="mapCtrl.saveCoord()" ng-disabled="mapCtrl.isDisabled" class="btn btn-success btn-raised ripple-effect" style="">Save Locations</button>
+                    </div>
+                    <div style="float:right; padding-right:5px">
+                        <button ng-click="mapCtrl.clear()" ng-disabled="mapCtrl.isDisabled" class="btn btn-success btn-raised ripple-effect"> Clear map </button>
+                    </div>
+                   
+                </div>
+            </div>
+            
+            </div>
+
+        <hr class="mBtm-50 mTop-50" data-symbol="Add Gallery">
+
+
+    <div class="row" id="createCoup">
+        <div class="col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+            <div class="col-md-11 col-sm-11 col-xs-11" filters="queueLimit, customFilter" nv-file-drop="" uploader="albumCtrl.uploader">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div>
+                            <div class="alert alert-warning" role="alert">
+                                <p> <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>Find Images </p>
+                                <input type="file" nv-file-select="" uploader="albumCtrl.uploader" style=" border: 2px solid;" />
+                            </div>
+                        </div>
+
+                        <div ng-show="albumCtrl.uploader.isHTML5">
+                            <div nv-file-drop="" uploader="albumCtrl.uploader">
+                                <div nv-file-over=" " uploader="albumCtrl.uploader" style="height: 150px;"
+                                     over-class="another-file-over-class" class="well my-drop-zone">
+                                    Drop your pictures here
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-8" style="margin-bottom: 40px">
+
+                        <div class="alert alert-info" role="alert">
+                            <p> <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>  You can upload 6 pictures in total</p>
+                        </div>
+
+                        <div class="alert alert-success" role="alert">
+                            <p> <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>Curent pictures {{ albumCtrl.uploader.queue.length }}      </p>
+                        </div>
+
+                        <table class="table-n">
+                            <thead>
+                                <tr>
+                                    <th width="50%">Name</th>
+                                    <th ng-show="albumCtrl.uploader.isHTML5">Size</th>
+                                    <th ng-show="albumCtrl.uploader.isHTML5">Progress</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in albumCtrl.uploader.queue">
+                                    <td>
+                                        <strong>{{ item.file.name }}</strong>
+
+                                        <div ng-thumb="{ file: item._file, width: 100, height: 100 }"></div>
+
+                                    </td>
+                                    <td ng-show="albumCtrl.uploader.isHTML5" nowrap>
+                                        {{ item.file.size/1024/1024|number:2 }} MB
+                                    </td>
+                                    <td ng-show="albumCtrl.uploader.isHTML5">
+                                        <div class="progress" style="margin-bottom: 0;">
+                                            <div class="progress-bar" role="progressbar"
+                                                 ng-style="{ 'width': item.progress + '%' }"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <span ng-show="item.isSuccess">
+                                            <i class="glyphicon glyphicon-ok">
+                                            </i>
+                                        </span>
+                                        <span ng-show="item.isCancel">
+                                            <i class="glyphicon
+                                glyphicon-ban-circle"></i>
+                                        </span>
+                                        <span ng-show="item.isError">
+                                            <i class="glyphicon glyphicon-remove">
+                                            </i>
+                                        </span>
+                                    </td>
+                                    <td nowrap>
+                                        <button type="button" class="btn btn-success btn-xs"
+                                                ng-click="item.upload()" ng-disabled="item.isReady ||
+                                 item.isUploading || item.isSuccess">
+                                            <span class="glyphicon glyphicon-upload"></span> Upload
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs"
+                                                ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                            <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-xs"
+                                                ng-click="item.remove()"
+                                                ng-disabled="item.isReady ||
+                                 item.isUploading || item.isSuccess">
+                                            <span class="glyphicon glyphicon-trash"></span> Remove
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <div>
+                                Queue progress:
+                                <div class="progress" style="">
+                                    <div class="progress-bar" role="progressbar"
+                                         ng-style="{ 'width': albumCtrl.uploader.progress + '%' }"></div>
+                                </div>
+                            </div>
+                            <div class="">
+                                <button type="button" class="btn btn-success btn-raised ripple-effect"
+                                        ng-click="albumCtrl.uploader.uploadAll()"
+                                        ng-disabled="!albumCtrl.uploader.getNotUploadedItems().length"
+                                        >
+                                    Upload all
+                                </button>
+
+                                <button type="button" class="btn close-button "
+                                        ng-click="albumCtrl.uploader.cancelAll()" ng-disabled="!albumCtrl.uploader.isUploading">
+                                    Cancel all
+                                </button>
+
+
+                                <div style="float:right">
+                                    <button type="button" class="btn btn-primary btn-raised ripple-effect" ng-click="albumCtrl.finish()">
+                                        Finish
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>

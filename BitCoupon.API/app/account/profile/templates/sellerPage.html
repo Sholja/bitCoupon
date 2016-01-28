@@ -1,0 +1,103 @@
+﻿<!-- Nav tabs -->
+<div class="row">
+    <div class="row mTop-20" id="inner-page">
+            <div class="container coup-seller-table">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="" ng-click="ctrl.showDiv()" aria-controls="home" role="tab" data-toggle="tab" class="tab-panel">Active Coupons</a></li>
+                    <li role="presentation"><a href="" ng-click="ctrl.hideDiv()" aria-controls="profile" role="tab" data-toggle="tab" class="tab-panel">Expired Coupons</a></li>
+
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="comments">
+                        <!--Active coupons tabel-->
+                        <div ng-show="ctrl.show">
+
+                            <div class="col-md-12 col-lg-12 coup-table-search">
+
+                                <table st-table="ctrl.sellerActiveCoupons" st-pagination-scroll st-pipe="ctrl.callSellerTabel" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="coup-table-th"colspan="5">
+                                                <input st-search placeholder="global search" class="input-sm form-control" type="search" />
+                                            </th>
+                                        </tr>
+                                        <tr style="font-weight:400;">
+                                            <th class="coup-select-info" st-sort="couponName">COUPON NAME</th>
+                                            <th class="coup-select-info" st-sort="description">DESCRIPTION</th>
+                                            <th class="coup-select-info" st-sort="price">PRICE</th>
+                                            <th></th>
+                                        </tr>
+                                       
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in ctrl.sellerActiveCoupons">
+                                            <td>{{item.Name}}</td>
+                                            <td>{{item.DescriptionOnCoupon}}</td>
+                                            <td>{{item.Price}}</td>
+                                            <td>
+                                                <div class="btn btn-raised ripple-effect btn-success btn-block">
+                                                    <a style="color:white" ui-sref="details({id: item.CouponId})">
+                                                        <span data-hover="Details">Details</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div ng-show="isLoading" class="loading-indicator"></div>
+
+
+
+
+                        </div>
+                        <!--Active coupons tabel-->
+                        <!--Expired coupons tabel-->
+                        <div ng-show="!ctrl.show">
+
+                            <div class="col-md-12 col-lg-12 coup-table-search">
+
+                                <table st-table="ctrl.sellerExpiredCoupons" st-pagination-scroll st-pipe="ctrl.callSellerTable" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="coup-table-th" colspan="5">
+                                                <input st-search placeholder="global search" class="input-sm form-control" type="search" />
+                                            </th>
+                                        </tr>
+                                        <tr style="font-weight:400;">
+                                            <th class="coup-select-info" st-sort="couponName">COUPON NAME</th>
+                                            <th class="coup-select-info" st-sort="description">DESCRIPTION</th>
+                                            <th class="coup-select-info" st-sort="price">PRICE</th>
+                                            <th></th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in ctrl.sellerExpiredCoupons">
+                                            <td>{{item.Name}}</td>
+                                            <td>{{item.DescriptionOnCoupon}}</td>
+                                            <td>{{item.NewPrice}}</td>
+                                            <td>
+                                                <div class="btn btn-raised ripple-effect btn-success btn-block">
+                                                    <a style="color:white;" ui-sref="expiredDetails({id: item.CouponId})">
+                                                        <span data-hover="Details">Details</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div ng-show="isLoading" class="loading-indicator"></div>
+
+
+                        </div>
+                        <!--Expired coupons tabel-->
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

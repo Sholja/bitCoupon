@@ -1,0 +1,111 @@
+﻿@model BitCoupon.MVC.Models.CollectionOfModelsViewModel
+
+<div class="top3cards col-lg-12 col-md-12 col-xs-12">
+    <div class="span3 statbox green col-lg-3 col-md-4 col-xs-12 col-sm-12 " ontablet="span6" ondesktop="span3">
+        <div class="boxchart">0,1,2,3,4,@Model.userCount</div>
+        <div class="number">@Model.userCount<i class="icon-arrow-up"></i></div>
+        <div class="title">Users</div>
+        <div class="footer">
+            <a href="/Home/Users">@*link for users*@ Users</a>
+        </div>
+    </div>
+    <div class="span3 statbox blue col-lg-3 col-md-4 col-xs-12 col-sm-12 col-md-offset-1 " ontablet="span6" ondesktop="span3">
+        <div class="boxchart">5,6,7,2,0,4,8,2,3,3,@Model.categories.Count</div>
+        <div class="number">@Model.categories.Count<i class="icon-arrow-up"></i></div>
+        <div class="title">Categories</div>
+        <div class="footer">
+            <a href="/Categories/Index">@*Link for Categories*@Categories</a>
+        </div>
+    </div>
+
+
+    <div class="span3 statbox yellow col-lg-3 col-md-4 col-xs-12 col-sm-12 col-md-offset-1 " ontablet="span6" ondesktop="span3">
+        <div class="boxchart">7,2,2,2,1,4,@Model.coupons.Count</div>
+        <div class="number">@Model.coupons.Count<i class="icon-arrow-down"></i></div>
+        <div class="title">Coupons</div>
+        <div class="footer">
+            <a href="#">@*Link for coupons(currently non-existant)(prob. 3rd sprint)*@Coupons</a>
+        </div>
+    </div>
+</div>
+
+<div id="Latestusers" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+    <div class="box black span4" ontablet="span6" ondesktop="span4">
+        <div class="box-header">
+            <h2><i class="halflings-icon white user"></i><span class="break"></span>Admins</h2>
+            <div class="box-icon">
+                <a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+                <a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+            </div>
+        </div>
+        <div class="box-content">
+            <ul class="dashboard-list metro">
+                @{
+                    var counter = 0;
+                }
+                @foreach (var item in Model.users)
+                {
+                    <li class="blue">
+                        <strong>Name:</strong>@item.FirstName @item.LastName<br>
+                        <strong>Username:</strong>@item.UserName<br>
+                        <strong>Address:</strong> @item.Address
+                        @Html.HiddenFor(modelItem => item.Id, new { id = "userId" + counter })
+                        
+                    </li>
+                    <li>
+                        <input type="button" value="Send Message" class="btn btn-info" onclick="sendMessageToAdmin(@counter)" />
+                    </li>
+                    counter++;
+                }
+                
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function sendMessageToAdmin(counter) {
+        $.ajax({
+            url: '/Messages/Send'
+        }).success(function (response) {
+            bootbox.dialog({ message: response });
+            $('#sendMessageForm').submit(function (event) {
+                event.preventDefault();
+
+                var data = {
+                    Title: $("#title").val(),
+                    Content: $("#contentOfMessage").val(),
+                    ApplicationUserId: $("#userId" + counter).val()
+                }
+
+                console.log(data);
+                $.ajax({
+                    url: '/Messages/Send',
+                    method: 'post',
+                    data: data
+                }).success(function (response) {
+                    bootbox.hideAll();
+                    bootbox.alert("Message Sent.");
+                }).error(function (error) {
+                    if (error.status === 403) {
+                        bootbox.alert("You can't send message to yourself.");
+                    }
+                    else {
+                        var response = JSON.parse(error.responseText);
+                        for (var i = 0; i < response.length; i++) {
+                            var error = response[i];
+                            var fieldKey = error.Key;
+                            var message = error.Message;
+
+                            $('input[name="' + fieldKey + '"]').parent().append('<span class="alert-danger" data-error >' + message + '</span>');
+                            $('textarea[name="' + fieldKey + '"]').parent().append('<span class="alert-danger" data-error >' + message + '</span>');
+                        }
+                    }
+                });
+            });
+        }).error(function (response) {
+            bootbox.alert(response.statusText);
+        });
+    }
+</script>

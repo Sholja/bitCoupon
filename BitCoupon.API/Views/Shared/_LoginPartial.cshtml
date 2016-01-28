@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Session.Count > 0)
+{
+    <div ng-controller="LoginController as loginCtrl">
+
+        <a ui-sref="profile" ui-sref-active="active"> {{ loginCtrl.service.username }} </a>
+        <a ng-click="loginCtrl.service.logout()" ui-sref-active="active"> Logout</a>
+    </div>
+
+}
+else
+{
+
+    <a ui-sref="register" ui-sref-active="active"> Register </a>
+    <a ui-sref="login" ui-sref-active="active"> Login </a>
+
+}
+
+

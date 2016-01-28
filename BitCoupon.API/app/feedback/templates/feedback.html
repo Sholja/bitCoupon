@@ -1,0 +1,54 @@
+﻿
+<div class="coup-feedback">
+    <form ng-submit="feedCtrl.service.createFeedback()">
+        <h2 style="text-align:center">Give Us Your Feedback</h2>
+        <div class="coup-feedback-basic">
+            <div class="col-md-5">
+                <div>
+                    <label for="feedbackName"> Name: </label>
+                    <input type="text" ng-model="feedCtrl.service.feedback.Name" placeholder="Name..." class="form-group" />
+                </div>
+                <div class="form-group">
+                    <label for="feedbackEmail">
+                        <span>*</span>Email:
+
+                    </label>
+                    <input type="email" ng-model="feedCtrl.service.feedback.Email"
+                           placeholder="Email..."
+                           class="form-control" />
+
+                </div>
+            </div>
+            <div class="col-md-7">
+                <fieldset class="input-group">
+                    <legend style="text-align:center"><span>*</span>How satisfied were you with our services:</legend>
+
+                    <input type="radio" class="input-radio" name="ChackBox" value="Very Satisfied" ng-model="feedCtrl.service.feedback.ChackBox" />Very Satisfied
+                    <br />
+                    <input type="radio" class="input-radio" name="ChackBox" value="Satisfied" ng-model="feedCtrl.service.feedback.ChackBox" />Satisfied
+                    <br />
+
+                    <input type="radio" class="input-radio" name="ChackBox" value="Neutral" ng-model="feedCtrl.service.feedback.ChackBox" />Neutral
+                    <br />
+                    <input type="radio" name="ChackBox" class="input-radio" id="radio4" value="Unsatisfied" ng-model="feedCtrl.service.feedback.ChackBox" />Unsatisfied
+                    <br />
+                    <input type="radio" name="ChackBox" class="input-radio" id="radio5" value="Very Unsatisfied" ng-model="feedCtrl.service.feedback.ChackBox" />Very Unsatisified
+                    <br />
+
+                </fieldset>
+            </div>
+        </div>
+      
+        <div class="coup-feedback-suggestion">
+            <h4> Feel free to add any other comments or suggestions: </h4>
+            <div>
+                <textarea class="coup-feedback-textarea" ng-model="feedCtrl.service.feedback.FeedBackContent"></textarea>
+            </div>
+            <h6>* The information given within the Feedback Form will be used for service improvement only and are strictly confidential. </h6>
+            <input type="submit" class="coup-feedback-button" value="Send" />
+        </div>
+    </form>
+</div>
+
+
+

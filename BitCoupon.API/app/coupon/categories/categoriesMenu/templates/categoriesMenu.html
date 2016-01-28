@@ -1,0 +1,21 @@
+﻿
+
+<div class="shadow bg-white mTop-30 frameLR">
+    <div class="row">
+        <div class="col-md-2 col-sm-4 col-xs-6" ng-repeat="category in ctrl.service.categoryList">
+            <div class="l-element">
+                <div class="box-icon">
+                    
+                    <div class="text">
+                        <a class="coup-categories-names" ng-click="ctrl.service.searchByCategory(category.Name)"> {{category.Name}} </a>
+                        <p>
+                         
+                        </p>
+                    </div>
+                </div>
+                <!--/.icon box -->
+            </div>
+        </div>
+      </div>
+    <!--/.row -->
+</div>

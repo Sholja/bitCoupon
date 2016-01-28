@@ -1,0 +1,144 @@
+﻿
+<div id="inner-page">
+    <div class="container createCouponDiv" style="background-color:white;">
+        <h3 style="padding-top: 60px;" class="dark-grey">Edit Coupon</h3>
+    <div class="col-md-12">
+        <br />
+        <br />
+          <div class="col-lg-6 col-md-6">
+
+            <div class="form-horizontal">
+                    <form ng-submit="editCtrl.editCoupon()" style="padding-bottom:60px;">
+
+                    <div class="form-group">
+                            <label for="PictureUrl" class="control-label"> Current Picture </label>
+                            <br />
+                            <br />
+                            <div class="">
+                            <img class="img-rounded" src="{{editCtrl.service.editCouponSelected.PictureUrl}}" alt="Alternate Text" style="max-width: 281px;" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div ng-repeat="item in editCtrl.uploader.queue">
+                                <label for="PictureUrl" class="control-label"> {{ item.file.name }}</label>
+                                <div class="">
+                                    <div style="zoom: 1.8;  border-radius: 5%;" ng-thumb="{ file: item._file, width: 280, height: 185 }"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="editCtrl.uploader.queue<0">
+                       
+                    </div>
+
+                        <!--  upload   -->
+                        <div class="form-group">
+                            <label for="PictureUrl" class="control-label"> *PictureUrl </label>
+                            <div class="">
+                                <input type="file" nv-file-select="" uploader="editCtrl.uploader" accept="image/x-png, image/gif, image/jpeg" ng-click="editCtrl.queueRestart()" />
+                            </div>
+                        </div>
+                        <!-- kraj  upload-a   -->
+
+
+                        <div class="form-group">
+                            <label for="DescriptionOnCoupon" class="control-label"> *Description on coupon(short) </label>
+                            <div class="">
+                                <input type="text" id="DescriptionOnCoupon"
+                                       ng-model="editCtrl.service.editCouponSelected.DescriptionOnCoupon"
+                                       ng-required="true"
+                                       ng-minlength="10"
+                                       ng-maxlength="62" />
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="DescriptionOnSellerPage" class="control-label"> *Descrption on details(long) </label>
+                            
+
+                            <div class="form-group-lg" style="width:281px">
+                                <textarea ui-tinymce ng-model="editCtrl.service.editCouponSelected.DescriptionOnSellerPage"
+                                          ng-required="true"></textarea>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="TotalNumberOfCoupons" class="control-label"> *Increse total number of coupons  </label>
+                            <div class="">
+                                <input type="number" id="TotalNumberOfCoupons"
+                                       ng-model="editCtrl.service.editCouponSelected.TotalNumberOfCoupons"
+                                       ng-required="true"
+                                       min="0"
+                                       max="1000" 
+                                      />
+                            </div>
+                                <label> <strong>(current : {{ ::editCtrl.service.editCouponSelected.TotalNumberOfCoupons}} + Additional: {{editCtrl.service.editCouponSelected.TotalNumberOfCoupons}} ) </strong></label>
+                            </div>
+
+                        <div class="form-group">
+                            <label for="SellerUrl" class="control-label"> Youre web site(optional) </label>
+                            <div class="">
+                                <input type="text" id="SellerUrl"
+                                       ng-model="editCtrl.service.editCouponSelected.SellerUrl" />
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="">
+                                @*<button style="width: 94%;" type="submit" class="btn btn-block btn-default btn-raised btn-md"> <strong>Next</strong> </button>*@
+                                <button type="submit" class="btn btn-success btn-raised ripple-effect">
+                                    Proceed
+                                </button>
+
+
+                            </div>
+                        </div>
+
+
+
+</form>
+            </div>
+        </div>
+        <br />
+        <div class="col-lg-6 col-md-6">
+            @*<div class="alert alert-info" role="alert">
+                <p>
+                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>  New picture
+                </p>
+            </div>
+            
+            
+            <br />
+            <br />*@
+             <div class="alert alert-info" role="alert">
+                <p>
+                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>  Instructions
+                </p>
+            </div>
+           
+            <br />
+            <br />
+            <div class="alert alert-danger" role="alert">
+                <p><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Your short description will be displayed on main page BITCoupon. In order to help buyers so they can easily buy your coupon we advise you to include specific(cacthy) words for your buissnes. </p>
+            </div>
+            <br />
+            <br />
+            <div class="alert alert-danger" role="alert">
+                <p><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Your long description is going to be shown on details page. We sugest to use that option to specify everything about your bussines buyer needs to know. </p>
+            </div>
+            <br />
+            <br />
+            <div class="alert alert-danger" role="alert">
+                <p> <span style="color:red" class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Your total number of cupons has to bi divisible by required number of coupons: <span style="font-size:20px; color:red">{{editCtrl.service.editCouponSelected.RequiredNumberOfCoupons  }}</span>. It means that you can increse your total number of coupons by <span style="font-size:20px; color:red">{{editCtrl.service.editCouponSelected.RequiredNumberOfCoupons  }}</span>. </p>
+           
+            </div>
+       
+        </div>
+    </div>
+</div>
+</div>
+

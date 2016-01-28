@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+{
+@Html.Partial("_DashBoard", new BitCoupon.MVC.Models.CollectionOfModelsViewModel())
+}
+else if (User.IsInRole("Salesman"))
+{
+    Url.Action("Users", "Account");
+}
+
+
+

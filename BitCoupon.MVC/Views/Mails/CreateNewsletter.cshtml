@@ -1,0 +1,165 @@
+﻿@model IEnumerable<BitCoupon.DAL.Models.Coupon>
+
+@{
+    ViewBag.Title = "CreateNewsletter";
+}
+
+<h2>Send Newsletter</h2>
+
+<div class="col-md-6">
+    <h4>Newsletter Create</h4>
+    <hr />
+   
+    
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myForm" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Mail</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+           
+            <div class="form-group">
+               <label for="firstPicture" class="col-md-2"> Image 1</label>
+                <div class="col-md-10">
+                  <select id="id1">
+                     @foreach (var item in Model)
+	              {
+		              <option value="@item.CouponId"> @item.Name</option>
+	              }
+                      </select>
+                  </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <label for="firstPicture" class="col-md-2"> Image 2</label>
+                <div class="col-md-10">
+                    <select id="id2">
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item.CouponId"> @item.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <label for="firstPicture" class="col-md-2"> Image 3</label>
+                <div class="col-md-10">
+                    <select id="id3">
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item.CouponId"> @item.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <label for="firstPicture" class="col-md-2"> Image 4</label>
+                <div class="col-md-10">
+                    <select id="id4">
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item.CouponId"> @item.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <label for="firstPicture" class="col-md-2"> Image 5</label>
+                <div class="col-md-10">
+                    <select id="id5">
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item.CouponId"> @item.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <label for="firstPicture" class="col-md-2"> Image 6</label>
+                <div class="col-md-10">
+                    <select id="id6">
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item.CouponId"> @item.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <br />
+             <div class="form-group">
+                <label for="firstPicture" class="col-md-2"> Image 7</label>
+                <div class="col-md-10">
+                    <select id="id7">
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item.CouponId"> @item.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+             <div class="form-group">
+                <div class="col-md-offset-4">
+                    <input type="submit" value="Send Newsletter" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    }
+
+
+</div>
+
+<div class="col-md-6">
+    
+        <img src="~/img/NewsletterTemplate.png" alt="Alternate Text" class="img-responsive" />
+    
+
+</div>
+<p>
+  
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@section Scripts{
+<script>
+    $(document).ready(function () {
+        $("#myForm").submit(function (e) {
+            e.preventDefault();
+            var data = {
+                id1: $("#id1").val(),
+                id2: $("#id2").val(),
+                id3: $("#id3").val(),
+                id4: $("#id4").val(),
+                id5: $("#id5").val(),
+                id6: $("#id6").val(),
+                id7: $("#id7").val()
+               
+             }
+            console.log(data);
+            $.ajax({
+
+                url: "/Mails/CreateNewsletter",
+                method: "post",
+                data: data
+
+
+
+            }).success(function (response) {
+                console.log(response);
+            }).error(function (response) { });
+            console.log(response);
+        })
+    });
+</script>
+}

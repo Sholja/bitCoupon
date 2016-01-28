@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- start: Meta -->
+    <meta charset="utf-8">
+    
+    <meta name="description" content="Bootstrap Metro Dashboard">
+    <meta name="author" content="Dennis Ji">
+    <meta name="keyword" content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <!-- end: Meta -->
+    <!-- start: Mobile Specific -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- end: Mobile Specific -->
+    <!-- start: CSS -->
+    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
+    <!-- end: CSS -->
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/adminpanel")
+
+</head>
+<body>
+    <!-- start: Header -->
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div style="align-items:center" class="container-fluid">
+
+
+                <div class="navbar-header">
+                    <a class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                    </a>
+                    <a class="navbar-brand" href="/Home">BitCoupon</a>
+
+                </div>
+
+                <!-- start: Header Menu -->
+                <div class="nav-no-collapse header-nav ">
+                    <ul class="nav navbar-nav pull-right">
+                        @Html.Partial("_LoginPartial")
+                    </ul>
+                </div>
+                <!-- end: Header Menu -->
+
+            </div>
+        </div>
+    </div>
+    <!-- start: Header -->
+    @if (User.IsInRole("Salesman"))
+    {
+        <!-- start: Main Menu -->
+        <!-- start: Main Menu -->
+        <div id="sidebar-left" class="span2">
+            <div class="nav-collapse sidebar-nav">
+                <ul class="nav nav-tabs nav-stacked main-menu">
+                    <li><a href="/Account/RegisterBuyer"><i class="halflings-icon white plus-sign"></i><span class="hidden-tablet"> Add Buyer </span></a></li>
+                   
+                    <li><a href="/Account/Users"><i class="halflings-icon white user"></i><span class="hidden-tablet"> Find Users </span></a></li>
+                    
+                    <li><a href="/Account/Login"><i class="halflings-icon white warning-sign"></i><span class="hidden-tablet"> Login Page</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- end: Main Menu -->
+    }
+    else if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+    {
+    <!-- start: Main Menu -->
+    <div id="sidebar-left" class="span2">
+        <div class="nav-collapse sidebar-nav">
+            <ul class="nav nav-tabs nav-stacked main-menu">
+                <li><a href="/Home"><i class="halflings-icon white barcode"></i><span class="hidden-tablet"> Dashboard</span></a></li>
+                <li>
+                    <a href="#" class="dropmenu"><i class="halflings-icon white envelope"></i><span class="hidden-tablet"> Messages</span></a>
+                    <ul>
+                        <li><a href="/Messages/Index"><i class="halflings-icon white eye-open"></i><span class="hidden-tablet"> System Messages </span></a></li>
+                        <li><a href="/Messages/PrivateMessages"><i class="halflings-icon white eye-close"></i><span class="hidden-tablet"> Private Messages </span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="dropmenu"><i class="halflings-icon white folder-open"></i><span class="hidden-tablet"> Mail Templates</span></a>
+                    <ul>
+                        <li><a href="/Mails/Index"><i class="halflings-icon white briefcase"></i><span class="hidden-tablet"> All templates </span></a></li>
+                        <li><a href="/Mails/Create"><i class="halflings-icon white wrench"></i><span class="hidden-tablet"> Create templates </span></a></li>
+                        <li><a href="/Mails/CreateNewsletter"><i class="halflings-icon white wrench"></i><span class="hidden-tablet"> Create Newsletter </span></a></li>
+                    </ul>
+                </li>
+
+
+                <li>
+                    <a href="#" class="dropmenu"><i class="halflings-icon white file"></i><span class="hidden-tablet"> Coupons</span></a>
+                    <ul>
+                        <li><a href="/Coupons/ActiveCoupons"><i class="halflings-icon white eye-open"></i><span class="hidden-tablet"> Active </span></a></li>
+                        <li><a href="/Coupons/ReactivateCoupons"><i class="halflings-icon white refresh"></i><span class="hidden-tablet"> Inactive </span></a></li>
+                        <li><a href="/Coupons/Deleted"><i class="halflings-icon white remove"></i><span class="hidden-tablet"> Deleted </span></a></li>
+                        <li><a href="/Coupons/Edited"><i class="halflings-icon white edit"></i><span class="hidden-tablet"> Edited </span></a></li>
+                        <li><a href="/Coupons/Approved"><i class="halflings-icon white flag"></i><span class="hidden-tablet"> Not Approved </span></a></li>
+                        <li><a href="/Coupons/Priority"><i class="halflings-icon white signal"></i><span class="hidden-tablet"> Set Priority </span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="dropmenu"><i class="halflings-icon white shopping-cart"></i><span class="hidden-tablet"> Refunds</span></a>
+                    <ul>
+                        <li><a href="/PayPalRefunds/GetRefunds"><i class="halflings-icon white thumbs-down"></i><span class="hidden-tablet"> Not Approved </span></a></li>
+                        <li><a href="/PayPalRefunds/GetApprovedRefunds"><i class="halflings-icon white thumbs-up"></i><span class="hidden-tablet"> Approved </span></a></li>
+                        <li><a href="/PayPalRefunds/GetDeclinedRefunds"><i class="halflings-icon white ban-circle"></i><span class="hidden-tablet"> Declined </span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="dropmenu" href="#"><i class="halflings-icon white tasks"></i><span class="hidden-tablet"> Categories</span></a>
+                    <ul>
+                        <li><a href="/Categories/Index"><i class="halflings-icon white tasks"></i><span class="hidden-tablet"> Categories </span></a></li>
+                        <li><a href="/Categories/Create"><i class="halflings-icon white edit"></i><span class="hidden-tablet"> Create </span></a></li>
+                        <li><a href="/Categories/Approve"><i class="halflings-icon white thumbs-up"></i><span class="hidden-tablet"> Approve </span></a></li>
+                    </ul>
+                </li>
+                <li><a href="/Feedbacks/Index"><i class="halflings-icon white download"></i><span class="hidden-tablet"> Feedbacks</span></a></li>
+                <li>
+                    <a class="dropmenu" href="#"><i class="halflings-icon white user"></i><span class="hidden-tablet"> Users </span></a>
+                    <ul>
+                        <li><a href="/Home/Users"><i class="halflings-icon white tasks"></i><span class="hidden-tablet"> All Users </span></a></li>
+                        <li><a href="/Account/RegisterSeller"><i class="halflings-icon white plus-sign"></i><span class="hidden-tablet"> Add Seller </span></a></li>
+                        <li><a href="/Account/RegisterSalesman"><i class="halflings-icon white arrow-right"></i><span class="hidden-tablet"> Add Salesman </span></a></li>
+                        @if (User.IsInRole("SuperAdmin"))
+                        {
+                            <li><a href="/Account/Register"><i class="halflings-icon white ok-sign"></i><span class="hidden-tablet"> Add Admin </span></a></li>
+                        }
+                    </ul>
+                </li>
+                <li>
+                    <a class="dropmenu" href="#"><i class="halflings-icon white tasks"></i><span class="hidden-tablet"> Avatars</span></a>
+                    <ul>
+                        <li><a href="/Avatars/Index"><i class="halflings-icon white eye-open"></i><span class="hidden-tablet"> Display </span></a></li>
+                        <li><a href="/Avatars/Create"><i class="halflings-icon white edit"></i><span class="hidden-tablet"> Create </span></a></li>
+  
+                    </ul>
+                </li>
+                <li><a href="/Account/Login"><i class="halflings-icon white warning-sign"></i><span class="hidden-tablet"> Login Page</span></a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- end: Main Menu -->
+    }
+    <div class="container body-content col-lg-offset-2 col-md-offset-2">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>
+                <span style="text-align:center;float:left">&copy; @DateTime.Now.Year <a href="http://jiji262.github.io/Bootstrap_Metro_Dashboard/" alt="Bootstrap_Metro_Dashboard">Bootstrap Metro Dashboard</a></span>
+            </p>
+        </footer>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+
+    <script>
+        ///Intecepts post requests and puts in header antyforgery token
+        $(document).ready(function () {
+
+            $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+                if (typeof originalOptions.data === "undefined")
+                    originalOptions.data = {};
+
+                options.data = $.param($.extend(originalOptions.data, { 
+                    "__RequestVerificationToken": $("form[action='" + originalOptions.url + "']  input[name='__RequestVerificationToken'] ").val()
+                }));
+            });
+
+        });
+    </script>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/adminpanel")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript">
+    tinymce.init({
+        selector: "#mytextarea",
+        
+        menu: {
+            file: { title: 'File', items: 'newdocument' },
+            edit: { title: 'Edit', items: 'undo redo | cut copy paste pastetext | selectall' },
+           
+        },
+        toolbar: [
+        "undo redo | styleselect | bold italic | link image",
+        "alignleft aligncenter alignright"
+        ]
+        
+       
+    });
+    </script>
+
+    <script>
+        $(window).on('click', function () {
+            $("[data-error]").remove();
+            $(".field-validation-error").html("");
+        });
+    </script>
+</body>
+
+</html>

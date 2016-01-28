@@ -1,0 +1,53 @@
+﻿@model IEnumerable<BitCoupon.DAL.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<br />
+<br />
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-header" data-original-title>
+            <h2><span class="break"></span>Categories</h2>
+            <div class="box-icon">
+                <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+            </div>
+        </div>
+        <div class="box-content">
+            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                <thead>
+                    <tr>
+                        <th>Category Name</th>
+                        <th>Approved</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Approved)
+                        </td>
+                        
+                        <td>
+                            <button class="btn btn-info" onclick="location.href='@Url.Action("Edit", "Categories", new { id = item.Id})'"> <i class="halflings-icon white edit"></i> Edit </button> |
+                            <button class="btn btn-success" onclick="location.href='@Url.Action("Details", "Categories", new { id = item.Id})'"> <i class="halflings-icon white zoom-in"></i> Details </button>|
+                            <button class="btn btn-danger" onclick="location.href='@Url.Action("Delete", "Categories", new { id = item.Id})'"><i class="halflings-icon white trashDelete"></i> Delete </button>
+                        </td>
+                    </tr>
+
+                }
+
+            </table>
+        </div>
+    </div><!--/span-->
+
+</div><!--/row-->
+

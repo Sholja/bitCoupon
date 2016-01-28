@@ -1,0 +1,27 @@
+﻿
+
+@{
+    Layout = null;
+}
+
+<h4>Already registered? Please, login here.</h4>
+<!-- Start of Login form -->
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "loginOnRegisterForm" }))
+{
+    <label> Username: <input type="text" id="usernameOnRegister" name="username" class="form-control" /> </label>
+            <br />
+            <label> Password: <input type="password" id="passwordOnRegister" name="password" class="form-control" /> </label>
+            <br />
+            <br />
+            <div class="form-group">
+                <input type="button" value="Login" class="btn btn-primary" id="loginBtnOnRegister" />
+                
+            </div>
+            <br />
+            <br />
+}
+<!-- End of Login form -->
+
+<script src="~/Scripts/api-account.js"></script>
+
+

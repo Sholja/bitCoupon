@@ -1,0 +1,184 @@
+﻿<div id="inner-page">
+    <div class="container" style="background-color:white;">
+       
+        <hr class="mBtm-50 mTop-50" data-symbol="Edit Locations">
+        
+       
+        <div class="row">
+            <div class="col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+                <div ng-controller="mapEditController as mapCtrl" class="col-md-11 col-sm-11 col-xs-11">
+
+                    <div id="googleMap" style="width:100%;height:380px;"></div>
+                    <br />
+                   
+                        <div style="float:right">
+                            <button ng-click="mapCtrl.saveMyCoord()" ng-disabled="mapCtrl.isDisabled" class="btn btn-success btn-raised ripple-effect">Save Locations</button>
+                        </div>
+                        <div style="float:right; padding-right:5px">
+                            <button ng-click="mapCtrl.clear()" ng-disabled="mapCtrl.isDisabled" class="btn btn-success btn-raised ripple-effect"> Clear map </button>
+
+                        </div>
+               
+            </div>
+        </div>
+      </div>
+       
+        <hr class="mBtm-50 mTop-50" data-symbol="Edit Gallery">
+       
+        <div class="row">
+            <div class="col-md-offset-1 col-sm-offset-1 col-xs-offset-1" id="imageDiv">
+                <div  class="col-md-11 col-sm-11 col-xs-11">
+                   
+                        <div class="col-md-4 col-sm-6" ng-repeat="image in editAlbumCtrl.service.editCouponSelected.Images" style="padding:5px;" id="image{{image.Id}}">
+                            <div style="padding:13%">
+                                <img ng-src="{{image.ImageUrl}}" alt="alternate text" class="editImages img-rounded img-responsive" style="text-align:center" />
+
+                                <button ng-click="editAlbumCtrl.deleteImg(image)" class="btn btn-primary btn-raised ripple-effect"> Delete Picture </button>
+
+                            </div>
+                            </div>
+                       
+                    </div>
+                </div>
+        </div>
+        <br />
+        <br />
+
+        <div class="col-md-12" filters="queueLimit, customFilter" nv-file-drop="" uploader="editAlbumCtrl.uploader">
+
+            <div class="row" id="createCoup">
+                <div class="col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+                    <div class="col-md-11 col-sm-11 col-xs-11">
+                        <div class="col-md-4">
+
+                            <div>
+                                <div class="alert alert-warning" role="alert">
+                                    <p> <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>Find Images </p>
+                                    <input type="file" nv-file-select="" uploader="editAlbumCtrl.uploader" style=" border: 2px solid;" />
+                                </div>
+                            </div>
+
+                            <div ng-show="editAlbumCtrl.uploader.isHTML5">
+                                <div nv-file-drop="" uploader="editAlbumCtrl.uploader">
+                                    <div nv-file-over="" uploader="editAlbumCtrl.uploader"
+                                         over-class="another-file-over-class" class="well my-drop-zone" style="height: 150px;">
+                                        Drop your pictures here
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+                        </div>
+                        <div class="col-md-8" style="margin-bottom: 40px">
+
+                            <div class="alert alert-info" role="alert">
+                                <p> <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>  You can upload 6 pictures in total</p>
+                            </div>
+
+                            <div class="alert alert-success" role="alert">
+                                <p> <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>Current pictures {{ editAlbumCtrl.service.editCouponSelected.Images.length}}        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Queue length: {{ editAlbumCtrl.uploader.queue.length }}</p>
+                            </div>
+
+
+                            <table class="table-n">
+                                <thead>
+                                    <tr>
+                                        <th width="50%">Name</th>
+                                        <th ng-show="editAlbumCtrl.uploader.isHTML5">Size</th>
+                                        <th ng-show="editAlbumCtrl.uploader.isHTML5">Progress</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in editAlbumCtrl.uploader.queue">
+                                        <td>
+                                            <strong>{{ item.file.name }}</strong>
+
+                                            <div ng-thumb="{ file: item._file, width: 100, height: 100 }"></div>
+
+                                        </td>
+                                        <td ng-show="editAlbumCtrl.uploader.isHTML5" nowrap>
+                                            {{ item.file.size/1024/1024|number:2 }} MB
+                                        </td>
+                                        <td ng-show="editAlbumCtrl.uploader.isHTML5">
+                                            <div class="progress" style="margin-bottom: 0;">
+                                                <div class="progress-bar" role="progressbar"
+                                                     ng-style="{ 'width': item.progress + '%' }"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <span ng-show="item.isSuccess">
+                                                <i class="glyphicon glyphicon-ok">
+                                                </i>
+                                            </span>
+                                            <span ng-show="item.isCancel">
+                                                <i class="glyphicon glyphicon-ban-circle"></i>
+                                            </span>
+                                            <span ng-show="item.isError">
+                                                <i class="glyphicon glyphicon-remove">
+                                                </i>
+                                            </span>
+                                        </td>
+                                        <td nowrap>
+                                            <button type="button" class="btn btn-success btn-xs"
+                                                    ng-click="item.upload()" ng-disabled="item.isReady ||
+                                 item.isUploading || item.isSuccess">
+                                                <span class="glyphicon glyphicon-upload"></span> Upload
+                                            </button>
+                                            <button type="button" class="btn btn-warning btn-xs"
+                                                    ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                                <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-xs"
+                                                    ng-click="item.remove()"
+                                                    ng-disabled="item.isReady ||
+                                 item.isUploading || item.isSuccess">
+                                                <span class="glyphicon glyphicon-trash"></span> Remove
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div>
+                                <div>
+                                    Queue progress:
+                                    <div class="progress" style="">
+                                        <div class="progress-bar" role="progressbar"
+                                             ng-style="{ 'width': editAlbumCtrl.uploader.progress + '%' }"></div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-success btn-raised ripple-effect"
+                                        ng-click="editAlbumCtrl.uploader.uploadAll()"
+                                        ng-disabled="!editAlbumCtrl.uploader.getNotUploadedItems().length"
+                                        style="width:19%;">
+                                    Upload all
+                                </button>
+                                <button type="button" class="btn close-button"
+                                        ng-click="editAlbumCtrl.uploader.cancelAll()" ng-disabled="!editAlbumCtrl.uploader.isUploading">
+                                    Cancel all
+                                </button>
+                                <div style="float:right">
+                                    <button type="button" class="btn btn-primary btn-raised ripple-effect" ng-click="editAlbumCtrl.finishBtn()">
+                                        Finish
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+      
+
+    </div>
+</div>

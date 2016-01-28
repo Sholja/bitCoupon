@@ -1,0 +1,66 @@
+﻿@model BitCoupon.DAL.Models.Message
+
+@{
+    Layout = null;
+}
+
+
+<div class="header">
+    <h1>@Model.Title</h1>
+    <div class="from"><i class="halflings-icon user"></i> <b>Sender: @Model.Sender</b></div>
+    <div class="date"><i class="halflings-icon time"></i> @Model.Time.Date <b>@Model.Time.TimeOfDay</b></div>
+
+    <div class="menu"></div>
+
+</div>
+<br />
+
+<div class="content">
+    <b>Content:</b>
+    <br />
+    @Model.Content
+</div>
+
+<div class="form-group">
+    <button class="btn btn-warning" onclick="deleteMessage(@Model.Id)"> Delete Message </button>
+    <button class="btn btn-danger" onclick="deleteComment(@Model.CommentId)"> Delete Reported Comment </button>
+    <button class="btn btn-primary" onclick="closeMessage()"> Close </button>
+</div>
+
+<script>
+    function deleteMessage(id) {
+        $.ajax({
+            url: '/Messages/Delete/' + id,
+            method: 'post'
+        }).success(function (response) {
+            bootbox.hideAll();
+            window.location.href = "/Messages/Index";
+        }).error(function (response) {
+            bootbox.alert(response.statusText);
+        });
+    }
+
+    function closeMessage()
+    {
+        bootbox.hideAll();
+    }
+
+    function deleteComment(id){
+        $.ajax({
+            url: '/Comments/Delete/' + id
+        }).success(function(response){
+            bootbox.hideAll();
+            bootbox.alert("Comment Deleted.");
+        }).error(function(response){
+            bootbox.hideAll();
+            if (response.status === 400)
+            {
+                bootbox.alert("This comment has been already deleted.");
+            }
+            else if (response.status === 401)
+            {
+                bootbox.alert("You don't have permission for this action.");
+            }
+        });
+    }
+</script>

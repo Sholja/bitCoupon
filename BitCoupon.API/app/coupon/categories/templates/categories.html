@@ -1,0 +1,22 @@
+﻿<div id="inner-page">
+    <div class="container body-content coup-background">
+        <h2 class="coup-titles"> Add new category </h2>
+
+        <form class="coup-forms" style="margin-bottom:-5%" ng-submit="catgCtrl.service.createCategory()" novalidate>
+
+
+            <div class="form-group">
+                <div class="">
+                    <input type="text"  ng-required="true" ng-maxlength="50" ng-model="catgCtrl.service.category.Name" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="">
+                    <input type="submit" value="Create" class="btn btn-success btn-raised ripple-effect coup-button-width"  />
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

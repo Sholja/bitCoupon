@@ -1,0 +1,41 @@
+﻿
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true" ng-controller="RegisterController as registerCtrl">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="coup-titles">Edit Profile</h3>
+            </div>
+            <div class="modal-body">
+                <div class="body-content">
+
+                        <!-- Start of registration form -->
+                        <form ng-submit="registerCtrl.service.editProfile()" style="text-align: center" novalidate class="coup-forms">
+
+                            <div class="form-group">
+
+                                <img class="coup-avatar-image-size" ng-model="registerCtrl.service.editUser.AvatarUrl" ng-src="{{registerCtrl.service.editUser.AvatarUrl}}" />
+                                <br />
+                                <select class="form-control" ng-model="registerCtrl.service.editUser.AvatarUrl" ng-options="avatar.PictureUrl as avatar.Name for avatar in registerCtrl.service.listAvatars"></select>
+
+                                <input type="text" class="form-control" placeholder="Location" ng-required="true" ng-minlength="2" ng-maxlength="50" ng-model="registerCtrl.service.editUser.Location" />
+
+
+                                <input type="text" class="form-control" placeholder="Address" ng-required="true" ng-minlength="2" ng-maxlength="50" ng-model="registerCtrl.service.editUser.Address" />
+
+
+                                <input type="email" class="form-control" placeholder="Email" ng-required="true" ng-model="registerCtrl.service.editUser.Email" />
+
+
+                                <input type="tel" class="form-control" placeholder="Phone Number" ng-required="true" ng-model="registerCtrl.service.editUser.PhoneNumber" ng-pattern-err-type="phoneNumber" pattern="\d{3}[\-]\d{3}[\-]\d{3}" />
+
+                            </div>
+                            <input type="submit" value="Edit" class="btn btn-success btn-raised ripple-effect" style="width:19%;" />
+                            <input type="button" class="btn btn close-button btn-raised ripple-effect-raised ripple-effect" ng-click="$hide()" value="Close" />
+                        </form>
+                        <!-- End of registration form -->
+                    </div>
+
+            </div>
+        </div>
+    </div>
+</div>

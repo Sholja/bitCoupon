@@ -1,0 +1,289 @@
+﻿<div class="container" id="inner-page" ng-if="buyerInfoCtrl.service.user.Role == 'Seller'">
+
+    <div class="row">
+        <div class="coup-profile-height">
+
+
+            <!-- left column -->
+
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <hr class="mBtm-50 mTop-50" data-symbol="Profile Details">
+                <div style="background-color:white">
+                    <br />
+                   
+                     <img alt="User Pic" ng-src="{{buyerInfoCtrl.service.user.AvatarUrl}}" class="avatar img-circle img-thumbnail coup-avatarUrl">
+
+                    <form class="form-horizontal coup-forms" role="form">
+                        <div class="form-group">
+                            <label class="control-label">First name:</label>
+                            <div class="">
+                                <input class="infoInputs" value="{{buyerInfoCtrl.service.user.FirstName}}" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Last name:</label>
+                            <div class="">
+                                <input class="infoInputs" value="{{buyerInfoCtrl.service.user.LastName}}" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Address:</label>
+                            <div class="">
+                                <input class="infoInputs" value="{{buyerInfoCtrl.service.user.Address}}, {{buyerInfoCtrl.service.user.Location}}" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Email:</label>
+                            <div class="">
+                                <input class="infoInputs" value="{{buyerInfoCtrl.service.user.Email}}" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Phone Number:</label>
+                            <div class="">
+                                <input class="infoInputs" value="{{buyerInfoCtrl.service.user.PhoneNumber}}" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                           
+                                <a class="change-password" href="" ng-click="buyerInfoCtrl.service.beginChangePassword()">Change Password</a>
+                           
+                        </div>
+                        <div class="form-group">
+                           
+                                <a class="change-password" href="" ng-click="buyerInfoCtrl.service.editProfileModal()">Edit Profile</a>
+                           
+                        </div>
+
+                    </form>
+                </div>
+
+
+            </div>
+
+
+            <!-- right column -->
+
+
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <hr class="mBtm-50 mTop-50" data-symbol="Your Coupons">
+                <div class="coup-background">
+                 
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="" ng-click="buyerInfoCtrl.showDiv()" aria-controls="home" role="tab" data-toggle="tab" class="tab-panel">Active Coupons</a></li>
+                        <li role="presentation"><a href="" ng-click="buyerInfoCtrl.hideDiv()" aria-controls="profile" role="tab" data-toggle="tab" class="tab-panel">Expired Coupons</a></li>
+
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content coup-height-95">
+                        <div role="tabpanel" class="tab-pane active coup-height-100" id="comments">
+                            <!--Active coupons tabel-->
+                            <div ng-show="buyerInfoCtrl.show" class="coup-height-100">
+
+                                <div class="coup-table-search coup-height-100">
+
+                                    <table st-table="buyerInfoCtrl.sellerActiveCoupons" st-pagination-scroll st-pipe="buyerInfoCtrl.callSellerTabel" class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="coup-table-th" colspan="5">
+                                                    <input st-search placeholder="global search" class="input-sm form-control" type="search" />
+                                                </th>
+                                            </tr>
+                                            <tr style="font-weight:400;">
+                                                <th class="coup-select-info" st-sort="couponName">COUPON NAME</th>
+                                                <th class="coup-select-info" st-sort="description">DESCRIPTION</th>
+                                                <th class="coup-select-info" st-sort="price">PRICE</th>
+                                                <th></th>
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in buyerInfoCtrl.sellerActiveCoupons">
+                                                <td>{{item.Name}}</td>
+                                                <td>{{item.DescriptionOnCoupon}}</td>
+                                                <td>{{item.Price}}</td>
+                                                <td>
+                                                    <div class="btn btn-raised ripple-effect btn-success btn-block">
+                                                        <a style="color:white" ui-sref="details({id: item.CouponId})">
+                                                            <span data-hover="Details">Details</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div ng-show="isLoading" class="loading-indicator"></div>
+
+
+
+
+                            </div>
+                            <!--Active coupons tabel-->
+                            <!--Expired coupons tabel-->
+                            <div ng-show="!buyerInfoCtrl.show" class="coup-height-100">
+
+                                <div class="col-md-12 col-lg-12 coup-table-search coup-height-100">
+
+                                    <table st-table="buyerInfoCtrl.sellerExpiredCoupons" st-pagination-scroll st-pipe="buyerInfoCtrl.callSellerTable" class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="coup-table-th" colspan="5">
+                                                    <input st-search placeholder="global search" class="input-sm form-control" type="search" />
+                                                </th>
+                                            </tr>
+                                            <tr style="font-weight:400;">
+                                                <th class="coup-select-info" st-sort="couponName">COUPON NAME</th>
+                                                <th class="coup-select-info" st-sort="description">DESCRIPTION</th>
+                                                <th class="coup-select-info" st-sort="price">PRICE</th>
+                                                <th></th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in buyerInfoCtrl.sellerExpiredCoupons">
+                                                <td>{{item.Name}}</td>
+                                                <td>{{item.DescriptionOnCoupon}}</td>
+                                                <td>{{item.NewPrice}}</td>
+                                                <td>
+                                                    <div class="btn btn-raised ripple-effect btn-success btn-block">
+                                                        <a style="color:white;" ui-sref="expiredDetails({id: item.CouponId})">
+                                                            <span data-hover="Details">Details</span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div ng-show="isLoading" class="loading-indicator"></div>
+
+
+                            </div>
+                            <!--Expired coupons tabel-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="container" id="inner-page" ng-if="buyerInfoCtrl.service.user.Role == 'Buyer'">
+
+    <div class="row">
+
+
+        <div class="coup-profile-height">
+            <!-- left column -->
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <hr class="mBtm-50 mTop-50" data-symbol="Profile Details">
+                <div style="background-color:white">
+                    <img ng-src="{{buyerInfoCtrl.service.user.AvatarUrl}}" class="avatar img-circle img-thumbnail coup-avatarUrl" alt="avatar">
+
+                    <!-- edit form column -->
+                    <form class="coup-forms form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="control-label">First Name:</label>
+                            <div class="">
+                                <input class="form-control" value="{{buyerInfoCtrl.service.user.FirstName}}" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Last Name:</label>
+                            <div class="">
+                                <input class="form-control" value="{{buyerInfoCtrl.service.user.LastName}}" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Address:</label>
+                            <div class="">
+                                <input class="form-control" value="{{buyerInfoCtrl.service.user.Address}}, {{buyerInfoCtrl.service.user.Location}}" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Email:</label>
+                            <div class="">
+                                <input class="form-control" value="{{buyerInfoCtrl.service.user.Email}}" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Phone Number:</label>
+                            <div class="">
+                                <input class="form-control" value="{{buyerInfoCtrl.service.user.PhoneNumber}}" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="">
+                                <a href="" ng-click="buyerInfoCtrl.service.beginChangePassword()" class="change-password">Change Password</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="">
+                                <a href="" ng-click="buyerInfoCtrl.service.editProfileModal()" class="change-password">Edit Profile</a>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <!-- right column -->
+            <div class="col-md-8 col-sm-12 col-xs-12  ">
+                <hr class="mBtm-50 mTop-50" data-symbol="Your Coupons">
+                <div style="background-color:white" class="coup-table-search">
+                    <hr class="mBtm-50 mTop-0" data-symbol="Bought Coupons" />
+                    <table st-table="buyerInfoCtrl.service.allPurchasedItems" st-pagination-scroll st-pipe="buyerInfoCtrl.service.callServer" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="coup-table-th" colspan="5">
+                                    <input st-search placeholder=" global search" class="input-sm form-control" type="search" />
+                                </th>
+                            </tr>
+                            <tr style="font-weight:400;">
+                                <th class="coup-select-info col-sm-2" st-sort="couponName">COUPON NAME</th>
+                                <th class="coup-select-info col-sm-5" st-sort="description">DESCRIPTION</th>
+                                <th class="coup-select-info col-sm-1" st-sort="price">PRICE</th>
+                                <th class="coup-select-info col-sm-2" st-sort="date"> DATE OF PURCHASE</th>
+                                <th class="col-sm-1"></th>
+                                <th class="col-sm-1"></th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in buyerInfoCtrl.service.allPurchasedItems">
+                                <td class="col-sm-2">{{item.CouponName}}</td>
+                                <td class="col-sm-5">{{item.Description}}</td>
+                                <td class="col-sm-1">{{item.Price}}</td>
+                                <td class="col-sm-2">{{item.TimeOfPurchase | date:dd.MM.yyyy}}</td>
+                                <td class="col-sm-1"><button ng-hide="item.IsRefunded" ng-click="buyerInfoCtrl.service.refund(item.CartId)" class="btn btn-raised ripple-effect btn-success btn-block" style="width:19%;">Refund</button></td>
+                                <td class="col-sm-1"><a href="/PrintCoupon/Print?uniqueId={{item.VerificationId}}" class="btn btn-raised ripple-effect btn-success btn-block" style="width:19%;">Print</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+          
+
+        </div>
+    </div>
+</div>
+    </div>
+
+
+
+
+<div ng-show="isLoading" class="loading-indicator"></div>
+

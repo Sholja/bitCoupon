@@ -1,0 +1,69 @@
+﻿@model IEnumerable<BitCoupon.DAL.Models.Coupon>
+
+@{
+    ViewBag.Title = "AcitveCoupons";
+}
+
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-header" data-original-title>
+            <h2><span class="break"></span>Active Coupons</h2>
+            <div class="box-icon">
+                <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+            </div>
+        </div>
+        <div class="box-content">
+            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                <thead>
+                    <tr>
+                        <th>Coupon Name</th>
+                        <th>Description</th>             
+                        <th>Expiration Date</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DescriptionOnCoupon)
+                        </td>
+                            
+                        <td>
+                           @Html.DisplayFor(modelItem => item.ExpirationTime)
+                        </td>
+                        
+                        <td>
+                            <button class="btn btn-info" onclick="deActivate('@item.CouponId')">
+                                <i class="halflings-icon white edit"></i> Deactivate
+                            </button>
+                        </td>
+                    </tr>
+
+                }
+
+            </table>
+        </div>
+    </div><!--/span-->
+
+</div><!--/row-->
+
+<script>
+    function deActivate(id) {
+        
+        $.ajax({
+            url: '/Coupons/ActiveCoupons/' + id,
+            method: 'post'
+        }).success(function (response) {
+            window.location.href = "/Coupons/ActiveCoupons";
+        }).error(function (response) {
+            bootbox.alert(response.statusText);
+        });
+    }
+</script>

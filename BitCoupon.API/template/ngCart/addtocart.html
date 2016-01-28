@@ -1,0 +1,13 @@
+﻿<div ng-hide="attrs.id">
+    <a class="btn btn-success btn-raised ripple-effect" data-toggle="modal" data-target="#myModal"></a>
+</div>
+<div ng-show="attrs.id">
+    <div>
+        <span ng-show="quantityMax">
+            <select name="quantity" id="quantity" ng-model="q"
+                    ng-options=" v for v in qtyOpt"></select>
+        </span>
+        <a ng-click="ngCart.addItem(id, name, price, q, data)"
+           ng-transclude></a>
+    </div>
+</div>

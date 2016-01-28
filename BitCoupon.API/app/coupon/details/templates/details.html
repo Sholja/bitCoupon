@@ -1,0 +1,470 @@
+﻿<section id="inner-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-sm-7">
+                <div class="post-media">
+                    <div id="slider" class="flexslider" my-main-directive>
+                        <ul class="slides">
+                            <li>
+                                <img ng-src="{{details.service.selectedCoupon.PictureUrl}}" alt="" />
+                            </li>
+                            <li ng-repeat="pic in details.service.selectedCoupon.Images">
+                                <img ng-src="{{pic.ImageUrl}}" alt="" />
+                            </li>
+                        </ul>
+                    </div>
+                    <!--/slider -->
+                    <div id="carousel" class="flexslider">
+                        <ul class="slides">
+                            <li>
+                                <img ng-src="{{details.service.selectedCoupon.PictureUrl}}" alt="" />
+                            </li>
+                            <li ng-repeat="pic in details.service.selectedCoupon.Images" my-repeat-directive>
+                                <img ng-src="{{pic.ImageUrl}}" alt="" />
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <!--/.carousel sinc -->
+                </div>
+                <!--/.post media -->
+                <div class="row mTop-20">
+
+
+                    <!-- /col 12 -->
+                    <div class="col-sm-12 col-lg-12">
+
+                        <div class="widget-inner bg-white shadow mBtm-20">
+                            <div role="tabpanel" id="tabs" class="tabbable responsive">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active">
+                                        <a href="" ng-click="details.service.showFirstPanel()" aria-controls="home" role="tab" data-toggle="tab">
+                                            Overview
+                                        </a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="" ng-click="details.service.showSecondPanel()" aria-controls="reviews" role="tab" data-toggle="tab">
+                                            Comments
+                                        </a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="" ng-click="details.service.showThirdPanel()" aria-controls="questions" role="tab" data-toggle="tab">
+                                            Questions
+                                        </a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="" ng-click="details.service.showForthPanel()" aria-controls="map" role="tab" data-toggle="tab">
+                                            Map &amp; Directions
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active">
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade active in" ng-show="details.service.showPanels == '1'">
+                                                <h4>
+                                                    Description
+                                                </h4>
+                                                <p class="lead">
+                                                </p>
+                                                <p ng-bind-html="details.service.selectedCoupon.DescriptionOnSellerPage | unsafe">
+                                                </p>
+                                            </div>
+                                            <!-- /tab content -->
+                                            <div ng-show="details.service.showPanels == '2'">
+                                                <div role="tabpanel" class="tab-pane">
+                                                    <section class="tab-content">
+                                                        <!-- comment start -->
+                                                        <div class="comment clearfix" ng-repeat="comment in details.service.selectedCoupon.Comments track by $index">
+                                                            <div class="comment-avatar">
+                                                                <img ng-src="{{comment.AvatarUrl}}" alt="avatar">
+                                                            </div>
+                                                            <header>
+                                                                <h3>
+                                                                    {{comment.Name}}
+                                                                </h3>
+                                                                <div class="comment-meta stars">
+                                                                    | {{comment.TimePosted | date:'medium'}}
+                                                                </div>
+                                                                <!--/.stars -->
+                                                            </header>
+                                                            <div class="comment-content">
+                                                                <div class="comment-body clearfix">
+                                                                    <p>
+                                                                        {{comment.Content}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="" ng-show="details.accountService.user.Id == comment.ApplicationUserId || details.accountService.user.Role == 'Admin' || details.accountService.user.Role == 'SuperAdmin'">
+                                                                <input class="btn close-button" type="button" style="float:right; width:10%;" value="Delete" ng-click="details.service.deleteComment(comment.CommentId)" />
+
+                                                                <input class="btn btn-raised ripple-effect btn-success btn-block" ng-show="details.accountService.user.UserId != comment.ApplicationUserId && details.accountService.user.Role == 'Buyer'" type="button" value="Report" ng-click="details.service.reportComment(comment.CommentId)" style="float:right; width:10%; margin-right:1%;" />
+                                                            </div>
+                                                        </div>
+                                                        <!-- comment end -->
+                                                        <!-- comment end -->
+                                                        <div ng-show="details.accountService.user.Role=='Buyer'">
+                                                            <h4 class="margin-bottom-20">
+                                                                Post a Comment
+                                                            </h4>
+                                                            <form ng-submit="details.service.createComment(details.service.selectedCoupon.CouponId)" class="comments" novalidate="novalidate">
+                                                                <fieldset>
+                                                                    <div>
+                                                                        <star-rating ng-model="details.service.rate" max-stars="5" readonly="details.isReadonly"></star-rating>
+                                                                    </div>
+                                                                    <div>
+                                                                        <strong>Rating:</strong>{{details.service.rate}}
+                                                                    </div>
+                                                                    <div class="space-xs" style="margin-bottom:5%;">
+                                                                        <div>
+                                                                            <textarea ng-required="true" ng-maxlength="200" ng-model="details.service.content" rows="8" name="message" id="message" placeholder="Write comment here ..." class="form-control"></textarea>
+                                                                        </div>
+
+                                                                        <input type="submit" class="btn btn-raised ripple-effect btn-success btn-block" style="width:16%; float:right; margin-top:2%;" value="Post" />
+                                                                    </div>
+                                                                    <!--<button type="submit" class="btn btn-green btn-raised ripple-effect">
+                                                                        Submit Comment
+                                                                    </button>-->
+
+                                                                </fieldset>
+
+                                                            </form>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </div>
+                                            <div ng-show="details.service.showPanels == '3'">
+                                                <div role="tabpanel" class="tab-pane">
+                                                    <section class="tab-content">
+                                                        <!-- question start -->
+                                                        <div class="comment clearfix" ng-repeat="question in details.service.selectedCoupon.Questions">
+                                                            <div class="comment-avatar">
+                                                                <img ng-src="{{question.BuyerAvatar}}" alt="avatar">
+                                                            </div>
+                                                            <header>
+                                                                <h3>
+                                                                    {{question.BuyerName}}
+                                                                </h3>
+                                                                <div class="comment-meta stars">
+                                                                    | {{question.TimePosted | date:'medium'}}
+                                                                </div>
+                                                                <!--/.stars -->
+                                                            </header>
+                                                            <div class="comment-content">
+                                                                <div class="comment-body clearfix">
+                                                                    <p>
+                                                                        {{question.QuestionContent}}
+                                                                    </p>
+                                                                    <div ng-show="details.accountService.user.Role == 'Seller'" ng-click="details.service.showAnswerFrom(question.Id)">
+                                                                        <div ng-show="details.accountService.user.Role == 'Seller'">
+                                                                            <a href="" class="btn btn-sm btn-default  btn-raised ripple-effect pull-right" ng-click="details.service.showAnswerFrom(question.Id)">
+                                                                                <i class="fa fa-reply">
+                                                                                </i>
+                                                                                Reply
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div ng-show="details.accountService.user.Id== details.service.selectedCoupon.ApplicationUserId">
+                                                                        <div ng-show="details.accountService.user.Role == 'Seller'">
+                                                                            <a href="" class="btn btn-sm btn-default  btn-raised ripple-effect pull-right" ng-click="details.service.deleteQuestion(question.Id)">
+                                                                                <i class="fa fa-reply">
+                                                                                </i>
+                                                                                Delete
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- question end -->
+                                                            <!-- answer start -->
+                                                            <div ng-hide="question.AnswerContent==null" class="col-sm-offset-2">
+                                                                <div class="comment clearfix">
+                                                                    <div class="comment-avatar">
+                                                                        <img ng-src="{{question.SellerAvatar}}" alt="avatar">
+                                                                    </div>
+                                                                    <header>
+                                                                        <h3>
+                                                                            {{question.SellerName}}
+                                                                        </h3>
+                                                                        <div class="comment-meta stars">
+                                                                            | {{question.TimeAnswered | date:'medium'}}
+                                                                        </div>
+                                                                    </header>
+                                                                    <div class="comment-content">
+                                                                        <div class="comment-body clearfix">
+                                                                            <p>
+                                                                                {{question.AnswerContent}}
+                                                                            </p>
+                                                                            <div ng-click="details.service.showAnswerFrom(question.Id)" ng-show="details.accountService.user.Id == details.service.selectedCoupon.ApplicationUserId">
+                                                                                <a href="" class="btn btn-sm btn-default  btn-raised ripple-effect pull-right" ng-click="details.service.showAnswerFrom(question.Id)">
+                                                                                    <i class="fa fa-reply">
+                                                                                    </i>
+                                                                                    Edit
+                                                                                </a>
+                                                                            </div>
+                                                                            <div ng-show="details.accountService.user.Id== details.service.selectedCoupon.ApplicationUserId">
+
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                    </section>
+
+
+
+                                                    <!-- answer end -->
+                                                </div>
+
+
+
+
+                                                <!--Start of question form-->
+
+                                                <div ng-show="details.accountService.user.Role=='Buyer'">
+                                                    <h4 class="margin-bottom-20">
+                                                        Post a Question
+                                                    </h4>
+                                                    <form ng-submit="details.service.createQuestion(details.service.selectedCoupon.CouponId)" novalidate>
+                                                        <div class="form-group">
+                                                            <div class="">
+                                                                <textarea placeholder="Write question here ..." class="coup-textarea-comment" ng-required="true" ng-maxlength="200" ng-model="details.service.question.QuestionContent">  </textarea>
+                                                            </div>
+                                                            <div style="text-align:center">
+                                                                <input type="submit" class="btn btn-raised ripple-effect btn-success btn-block" style="width:16%; float:right; margin-top:2%;" value="Post" />
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!--Start of question form-->
+                                            </div>
+                                        </div>
+
+                                        <div ng-show="details.service.showPanels == '4'">
+                                            <div role="tabpanel" class="tab-pane">
+                                                <!-- Google map, just iframe for now -->
+                                                <div class="" ng-controller="MapDetailsController as mapCtrl">
+                                                    <div id="googleMap" style="width:100%;height:400px;"></div>
+                                                </div>
+                                                <!-- /google map -->
+                                            </div>
+                                        </div>
+                                        <!-- /tab -->
+                                    </div>
+                                </div>
+                                <!--/tabs -->
+                            </div>
+                            <!-- /inner widget -->
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- col 7 -->
+            </div>
+
+            <!-- /col 8 -->
+            <div class="col-sm-4">
+                <div class="widget-inner bg-white shadow">
+                    <div class="buyPanel animated fadeInLeft bg-white Aligner text-center">
+                        <div class="content">
+                            <div class="deal-content">
+                                <h3>
+                                    {{details.service.selectedCoupon.Name}}
+                                    <star-rating ng-model="details.service.avgRate" max-stars="5" readonly="true"></star-rating>
+                                </h3>
+                                <p>
+                                    {{details.service.selectedCoupon.DescriptionOnCoupon}}
+                                </p>
+                            </div>
+                            <div class="price">
+                                <h1>
+                                    ${{details.service.selectedCoupon.NewPrice}}
+                                </h1>
+                            </div>
+                            <div class="buy-now mBtm-30" ng-show="details.accountService.user.Role=='Buyer'">
+                                <a class="btn btn-success btn-lg btn-raised ripple-effect btn-block" data-toggle="modal" data-target="#myModal">
+                                    <ngcart-addtocart id="{{ details.service.selectedCoupon.CouponId }}" price="{{ details.service.selectedCoupon.NewPrice }}" name="{{ details.service.selectedCoupon.Name }}" data="details.service.selectedCoupon">   <span style="color:white">ADD TO CART</span> </ngcart-addtocart>
+                                    <span class="link animate">
+                                    </span>
+                                </a>
+
+
+
+                            </div>
+                            <div class="dealAttributes">
+                                <div class="valueInfo bg-light shadow">
+                                    <div class="value">
+                                        <p class="value">
+                                            ${{details.service.selectedCoupon.NewPrice}}
+                                        </p>
+                                        <p class="text">
+                                            Price
+                                        </p>
+                                    </div>
+                                    <div class="discount">
+                                        <p class="value">
+                                            -{{((details.service.selectedCoupon.Price-details.service.selectedCoupon.NewPrice)/details.service.selectedCoupon.Price)*100  | number: 0}}%
+                                        </p>
+                                        <p class="text">
+                                            Discount
+                                        </p>
+                                    </div>
+                                    <div class="save">
+                                        <p class="value">
+                                            ${{details.service.selectedCoupon.Price}}
+                                        </p>
+                                        <p class="text">
+                                            Old Price
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="timeLeft text-center">
+                                    <p>
+                                        Expiration Time
+                                    </p>
+                                    <span class="time">
+                                        <i class="ti-timer color-green">
+                                        </i>
+                                        <b>
+                                            {{details.service.selectedCoupon.ExpirationTime | date:dd.MM.yyyy}}
+                                        </b>
+                                    </span>
+                                </div>
+                                <div class="social-sharing text-center" data-permalink="http://labs.carsonshold.com/social-sharing-buttons">
+                                    <!-- https://developers.facebook.com/docs/plugins/share-button/ -->
+                                    <a target="_blank" href="http://www.facebook.com/sharer.php?u=http://themeforest.net/user/codenpixel" class="share-facebook">
+                                        <span class="icon icon-facebook">
+                                        </span>
+                                        <span class="share-title">
+                                            Share
+                                        </span>
+                                        <span class="share-count is-loaded">
+                                            150
+                                        </span>
+                                    </a>
+                                    <!-- https://dev.twitter.com/docs/intents -->
+                                    <a target="_blank" href="http://twitter.com/share?url=http://themeforest.net/user/codenpixel" class="share-twitter">
+                                        <span class="icon icon-twitter">
+                                        </span>
+                                        <span class="share-title">
+                                            Tweet
+                                        </span>
+                                        <span class="share-count is-loaded">
+                                            62
+                                        </span>
+                                    </a>
+                                    <!--
+                                    https://developers.pinterest.com/pin_it/
+                                    Pinterest get data from the same Open Graph meta tags Facebook uses
+                                    -->
+                                </div>
+                                <!--/.social sharing -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/inner widget -->
+                <div class="terms-and-conditions bg-white shadow mTop-20">
+                    <div class="widget-inner">
+                        <hr data-symbol="ADDITIONAL INFO">
+                        <div class="content">
+                            <ul class="tick">
+                                <li ng-if="details.service.selectedCoupon.NuberOfCouponsToOfferManaged > 0">
+                                    You need to buy at least
+                                    <strong>
+                                        {{details.service.selectedCoupon.NuberOfCouponsToOfferManaged}}
+                                    </strong>
+                                    coupons
+                                </li>
+                                <li ng-if="details.service.selectedCoupon.NuberOfCouponsToOfferManaged <= 0">
+                                    <strong>
+                                        Coupon offer success
+                                    </strong>
+                                </li>
+                                <li>
+                                    Only
+                                    <strong>
+                                        {{details.service.selectedCoupon.TotalNumberOfCoupons}}
+                                    </strong>
+                                    coupons left
+                                </li>
+                                <li ui-sref="seller({id: details.service.selectedCoupon.CouponId})">
+                                    Seller:
+                                    <strong style="cursor:pointer">
+                                        {{details.service.selectedCoupon.SellerName}}
+                                    </strong>
+                                </li>
+                                <li>
+                                    Expiration time:
+                                    <strong>
+                                        {{details.service.selectedCoupon.ExpirationTime | date:dd.MM.yyyy}}
+                                    </strong>
+                                </li>
+                                <li ng-if="details.service.selectedCoupon.SellerUrl != null">
+                                    Our site:
+                                    <strong>
+                                        {{details.service.selectedCoupon.SellerUrl}}
+                                    </strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /widget inner -->
+                </div>
+                <div class="widget">
+                    <!-- /deal entry -->
+                    <div class="deal-entry green deal-entry-sm" ng-repeat="coupon in details.service.selectedCoupon.CtgCoupons">
+                        <div class="offer-discount">
+                            -{{((details.service.selectedCoupon.Price-details.service.selectedCoupon.NewPrice)/details.service.selectedCoupon.Price)*100 | number: 0}}%
+                        </div>
+                        <div class="image ripple-effect">
+                            <a ui-sref="details({id: coupon.CouponId})" target="_blank" title="#">
+                                <img ng-src="{{coupon.PictureUrl}}" class="img-responsive">
+                            </a>
+                            <span class="bought">
+                                <i class="ti-tag">
+                                </i>
+                                {{details.service.selectedCoupon.TotalNumberOfCoupons}}
+                            </span>
+                            <div class="caption">
+                                <h5 class="media-heading">
+                                    <a ui-sref="details({id: coupon.CouponId})">
+                                        {{coupon.Name}}
+                                    </a>
+                                </h5>
+                            </div>
+                        </div>
+                        <footer class="info_bar clearfix">
+                            <div class="prices clearfix">
+                                <div class="procent">
+                                    -{{((details.service.selectedCoupon.Price-details.service.selectedCoupon.NewPrice)/details.service.selectedCoupon.Price)*100  | number: 0}}%
+                                </div>
+                                <div class="price">
+
+                                    <b>
+                                        ${{details.service.selectedCoupon.NewPrice}}
+                                    </b>
+                                </div>
+                                <div class="old-price">
+                                    <span>
+
+                                        ${{details.service.selectedCoupon.Price}}
+                                    </span>
+                                </div>
+                            </div>
+                        </footer>
+                    </div>
+                    <!-- /deal entry -->
+                </div>
+                <!-- /.widget -->
+            </div>
+        </div>
+        <!-- /col 4 - sidebar -->
+    </div>
+    <!-- /main row -->
+</section>

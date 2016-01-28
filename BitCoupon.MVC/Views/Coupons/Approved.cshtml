@@ -1,0 +1,109 @@
+﻿@model IEnumerable<BitCoupon.DAL.Models.Coupon>
+
+@{
+    ViewBag.Title = "Approved";
+}
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-header" data-original-title>
+            <h2><span class="break"></span>Not Approved Coupons</h2>
+            <div class="box-icon">
+                <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+            </div>
+        </div>
+        <div class="box-content">
+            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                <thead>
+                    <tr>
+                        <th>Coupon Name</th>
+                        <th>Description</th>
+                        <th>Coupons to Buy</th>
+                        <th>Total Coupons</th>
+                        <th>Expiration Date</th>
+                        <th>Approve</th>
+
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DescriptionOnCoupon)
+                        </td>
+
+                        <td>
+                            <div class="form-group">
+
+                                <div class="col-md-10">
+                                    @Html.EditorFor(modelItem => item.RequiredNumberOfCoupons, new { htmlAttributes = new { @class = "form-control", @id = "required" + item.CouponId, @style = "height:30px" } })
+                                    @Html.ValidationMessageFor(modelItem => item.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+
+                                <div class="col-md-10">
+                                    @Html.EditorFor(modelItem => item.TotalNumberOfCoupons, new { htmlAttributes = new { @class = "form-control", @id = "total" + item.CouponId, @style = "height:30px" } })
+                                    @Html.ValidationMessageFor(modelItem => item.TotalNumberOfCoupons, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+
+                                <div class="col-md-10">
+                                    @Html.EditorFor(modelItem => item.ExpirationTime, new { htmlAttributes = new { @class = "form-control", @id = "date" + item.CouponId, @style = "height:30px" } })
+                                    @Html.ValidationMessageFor(modelItem => item.ExpirationTime, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn btn-info" onclick="activate('@item.CouponId')">
+                                <i class="halflings-icon white edit"></i> Approve
+                            </button>
+                        </td>
+                    </tr>
+
+                }
+
+            </table>
+        </div>
+    </div><!--/span-->
+
+</div><!--/row-->
+
+
+
+<script>
+    function activate(id) {
+        var data = {
+            Required: $('#required' + id).val(),
+            Total: $('#total' + id).val(),
+            Date: $('#date' + id).val()
+        }
+
+        $.ajax({
+            url: '/Coupons/Approved/' + id,
+            method: 'post',
+            data: data
+        }).success(function (response) {
+            window.location.href = "/Coupons/Approved";
+        }).error(function (response) {
+            console.log(response.status);
+            if (response.status == 404)
+                bootbox.alert("Total coupons have to match required or total coupons are smaller then required.");
+            else
+                bootbox.alert("Date is not valid.");
+        });
+    }
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

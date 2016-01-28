@@ -1,0 +1,459 @@
+﻿<!--Start of index page carousel-->
+<div class="slider">
+    <div class="container">
+        <div class="row">
+            <div id="grid-slider" class="flexslider" my-main-directive>
+                <ul class="slides">
+                    <li ng-repeat="slide in search.serviceSearch.bestDeals" my-repeat-directive>
+                        <div class="col-sm-7 col-lg-8 omega">
+                            <a ui-sref="details({id: slide.CouponId})">
+                                <article class="bg-image entry-lg" data-image-src="{{ slide.PictureUrl }}" style="background: url({{slide.PictureUrl}}); background-repeat:no-repeat; background-size:cover">
+                                    <div class="deal-short-entry bg-green">
+                                        <p>
+                                            {{slide.DescriptionOnCoupon}}
+                                        </p>
+                                    </div>
+                                </article>
+                            </a>
+                        </div>
+                        <div class="col-sm-5 col-lg-4 alpha entry-lg">
+                            <div class="buyPanel animated fadeInLeft bg-white Aligner shadow">
+                                <div class="content">
+                                    <div class="deal-content">
+                                        <h3>
+                                            <a ui-sref="details({id: slide.CouponId})">{{slide.Name}}</a>
+                                        </h3>
+                                        <p>
+                                            {{slide.DescriptionOnCoupon}}
+                                        </p>
+                                    </div>
+                                    <ul class="deal-price list-unstyled list-inline">
+                                        <li class="price">
+                                            <h3>
+                                                ${{slide.NewPrice}}
+                                            </h3>
+                                        </li>
+                                        <li class="buy-now" ng-if="search.accountService.user.Role == 'Buyer'">
+                                            <a class="btn btn-success btn-raised ripple-effect">
+                                                <ngcart-addtocart id="{{ slide.CouponId }}" price="{{ slide.NewPrice }}" name="{{ slide.Name }}" data="slide"> <span style="color:white">Add To Cart</span>  </ngcart-addtocart>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                    <div class="dealAttributes">
+                                        <div class="valueInfo bg-light shadow">
+                                            <div class="value">
+                                                <p class="value">
+                                                    ${{slide.Price}}
+                                                </p>
+                                                <p class="text">
+                                                    Value
+                                                </p>
+                                            </div>
+                                            <div class="discount">
+                                                <p class="value">
+                                                    {{(slide.Price - slide.NewPrice )/slide.Price * 100 | number:0}}%
+                                                </p>
+                                                <p class="text">
+                                                    Discount
+                                                </p>
+                                            </div>
+                                            <div class="save">
+                                                <p class="value">
+                                                    ${{slide.Price - slide.NewPrice}}
+                                                </p>
+                                                <p class="text">
+                                                    SAVINGS
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- /.value info -->
+                                        <div class="timeLeft text-center">
+                                            <p>
+                                                Hurry up Only a few deals left
+                                            </p>
+                                            <span class="time">
+                                                <i class="ti-timer color-green">
+                                                </i>
+                                                <b>
+                                                    {{slide.ExpirationTime | date:'medium'}}
+                                                </b>
+                                            </span>
+                                        </div>
+                                        <ul class="statistic list-unstyled list-inline">
+                                            <li>
+                                                <p>
+                                                    <i class="ti-user">
+                                                    </i>
+                                                    <b>
+                                                        for {{slide.RequiredNumberOfCoupons}}
+                                                    </b>
+                                                    Person
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <i class="ti-tag">
+                                                </i>
+                                                <div ng-if="slide.Purchase > 0">
+                                                    <b>
+                                                        {{slid.Purchase}}
+                                                    </b>
+                                                    Bought
+                                                </div>
+                                                <div ng-if="slide.Purchase == 0">
+                                                    <b>
+                                                        {{slid.Purchase}}
+                                                    </b>
+                                                    0 Bought
+                                                </div>
+                                            </li>
+                                            <li ng-if="slide.NuberOfCouponsToOfferManaged  <= 0">
+                                                <i class="ti-face-smile">
+                                                </i>
+                                                Offer success
+                                            </li>
+                                            <li ng-if="slide.NuberOfCouponsToOfferManaged > 0">
+                                                <i class="ti-face-sad">
+                                                </i>
+                                                {{slide.NuberOfCouponsToOfferManaged}} left for offer to succeed
+                                            </li>
+                                        </ul>
+                                        <div class="social-sharing text-center" data-permalink="http://labs.carsonshold.com/social-sharing-buttons">
+                                            <!-- https://developers.facebook.com/docs/plugins/share-button/ -->
+                                            <a target="_blank" href="http://www.facebook.com/sharer.php?u=http://themeforest.net/user/codenpixel" class="share-facebook">
+                                                <span class="icon icon-facebook">
+                                                </span>
+                                                <span class="share-title">
+                                                    Share
+                                                </span>
+                                            </a>
+                                            <!-- https://dev.twitter.com/docs/intents -->
+                                            <a target="_blank" href="http://twitter.com/share?url=http://themeforest.net/user/codenpixel" class="share-twitter">
+                                                <span class="icon icon-twitter">
+                                                </span>
+                                                <span class="share-title">
+                                                    Tweet
+                                                </span>
+                                            </a>
+
+                                        </div>
+                                        <!--/.social sharing -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /#buypanel -->
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End of index page carousel-->
+
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <!--- Start of coupons list directive-->
+            <div class="row">
+                <coup-coupons-list>
+
+                </coup-coupons-list>
+
+            </div>
+            <!--- End of coupons list directive-->
+            <!--- start of pagination button-->
+            <div class="row">
+                <button class="btn btn col-md-offset-4 col-md-4 PaginationButton"
+                        ng-disabled="!search.serviceSearch.hasNext"
+                        ng-click="search.serviceSearch.loadCoupons()">
+                    More...
+                </button>
+            </div>
+            <!--- end of pagination button-->
+        </div>
+
+
+        <div class="col-sm-4 sidebar">
+            <div class="inner-side shadow">
+
+
+                <div class="widget ">
+                    <hr data-symbol="LOGIN INFO">
+                    <ul class="nav sidebar-nav">
+
+                        <li>
+                            <i>
+                                <strong> Admin: </strong> <br /> Username: benjo@benjo.com <br /> Password: Benjo@123
+                            </i>
+                            <br />
+                            <br />
+                            <i>
+                                <strong> Seller: </strong>  <br /> Username: seller@seller.com <br /> Password: Seller@123
+                            </i>
+                            <br />
+                            <br />
+                            <i>
+                                <strong> Buyer: </strong> <br /> Username: buyer@buyer.com <br /> Password: Buyer@123
+                            </i>
+                            <br />
+                            <br />
+                            <i>
+                                <strong> Admin Panel: </strong> <br /> <a href="http://bitcoupon.azurewebsites.net/#/admin">http://bitcoupon.azurewebsites.net/#/admin</a>
+                            </i>
+                        </li>
+                    </ul>
+                    <!-- Sidebar divider -->
+                </div>
+
+                <!-- /.widget -->
+                <div class="widget widget-menu">
+                    <hr data-symbol="CATEGORIES">
+                    <!-- Sidebar navigation -->
+                    <ul class="nav sidebar-nav">
+
+                        <li ng-repeat="category in search.serviceSearch.categoryList">
+                            <a href="" ng-click="search.serviceSearch.searchByCategory(category.Name)">
+                                <i ng-if="category.Name == 'All Categories'" class="ti-star">
+                                </i>
+                                <i ng-if="category.Name == 'Food'" class="ti-apple">
+                                </i>
+                                <i ng-if="category.Name == 'Other'" class="ti-direction-alt">
+                                </i>
+                                <i ng-if="category.Name == 'Shoes'" class="ti-shopping-cart">
+                                </i>
+                                <i ng-if="category.Name == 'Sport'" class="ti-basketball">
+                                </i>
+                                <i ng-if="category.Name == 'Vacations'" class="ti-world">
+                                </i>
+                                {{category.Name}}
+                                <span class="sidebar-badge">
+                                    {{category.CouponsNumber}}
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <!-- Sidebar divider -->
+                </div>
+
+
+                <div class="widget widget-add">
+                    <hr data-symbol="ADVERTISE">
+                    <a href="http://www.bitcamp.ba/"><img src="~/Images/bitcamp.jpg" alt="add" class="img-responsive"></a>
+                </div>
+
+
+                <!-- /widget -->
+                <div class="widget widget-featured">
+                    <hr data-symbol="BEST RATED">
+                    <div ng-repeat="coupon in search.serviceSearch.bestRated">
+                        <div class="media media-sm entry-rating">
+                            <div class="media-left">
+                                <img class="media-object" ng-src="{{coupon.PictureUrl}}" alt="blog-thumb">
+                            </div>
+                            <div class="media-body">
+                                <h5 class="media-heading">
+                                    <a ui-sref="details({id: coupon.CouponId})">
+                                        {{coupon.Name}}
+                                    </a>
+                                </h5>
+                                <ul class="list-inline">
+                                    <li>
+                                        <p class="price line-trough">
+                                            ${{coupon.Price}}
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p class="price">
+                                            ${{coupon.NewPrice}}
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /widget -->
+                <div class="widget widget-tabs">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div role="tabpanel" id="tabs" class="tabbable responsive">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+
+                                    <li role="presentation" class="active">
+                                        <a href="" ng-click="search.showLatest()" aria-controls="home" role="tab" data-toggle="tab">
+                                            Latest
+                                        </a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="" ng-click="search.showBestDeals()" aria-controls="profile" role="tab" data-toggle="tab">
+                                            Best Deals
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!-- Tab panes -->
+
+                                <div class="tab-content">
+                                    <div ng-repeat="coupon in search.serviceSearch.latest">
+                                        <div ng-show="search.tabPanels">
+                                            <div role="tabpanel" class="tab-pane active">
+
+                                                <div class="deal-entry green deal-entry-sm">
+                                                    <div class="offer-discount">
+                                                        ${{coupon.NewPrice}}
+                                                    </div>
+                                                    <div class="image ripple-effect">
+                                                        <a href="" target="_blank" title="#">
+                                                            <img ng-src="{{coupon.PictureUrl}}" alt="#" class="img-responsive">
+                                                        </a>
+                                                        <span class="bought">
+                                                            <i class="ti-tag">
+                                                            </i>
+                                                            {{coupon.TotalNumberOfCoupons}}
+                                                        </span>
+                                                        <div class="caption">
+                                                            <h5 class="media-heading">
+                                                                <a ui-sref="details({id: coupon.CouponId})">
+                                                                    {{coupon.Name}}
+                                                                </a>
+                                                            </h5>
+                                                        </div>
+                                                    </div>
+                                                    <footer class="clearfix">
+                                                        <div class="valueInfo shadow">
+                                                            <div class="value">
+                                                                <p class="value">
+                                                                    ${{coupon.Price}}
+                                                                </p>
+                                                                <p class="text">
+                                                                    Value
+                                                                </p>
+                                                            </div>
+                                                            <div class="discount">
+                                                                <p class="value">
+                                                                    {{(coupon.Price - coupon.NewPrice )/coupon.Price * 100 | number:0}}%
+                                                                </p>
+                                                                <p class="text">
+                                                                    Discount
+                                                                </p>
+                                                            </div>
+                                                            <div class="save">
+                                                                <p class="value">
+                                                                    ${{coupon.Price - coupon.NewPrice}}
+                                                                </p>
+                                                                <p class="text">
+                                                                    SAVINGS
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </footer>
+                                                </div>
+                                            </div>
+
+                                            <!--/.deal entry -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /tab content -->
+
+                                <div role="tabpanel" class="tab-pane">
+                                    <div ng-repeat="coupon in search.serviceSearch.bestDeals">
+                                        <div ng-show="!search.tabPanels">
+                                            <div role="tabpanel" class="tab-pane active">
+
+                                                <div class="deal-entry green deal-entry-sm">
+                                                    <div class="offer-discount">
+                                                        ${{coupon.NewPrice}}
+                                                    </div>
+                                                    <div class="image ripple-effect">
+                                                        <a href="" target="_blank" title="#">
+                                                            <img ng-src="{{coupon.PictureUrl}}" alt="#" class="img-responsive">
+                                                        </a>
+                                                        <span class="bought">
+                                                            <i class="ti-tag">
+                                                            </i>
+                                                            Best Deal!
+                                                        </span>
+                                                        <div class="caption">
+                                                            <h5 class="media-heading">
+                                                                <a ui-sref="details({id: coupon.CouponId})">
+                                                                    {{coupon.Name}}
+                                                                </a>
+                                                            </h5>
+                                                            <p class="stars">
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <footer class="clearfix">
+                                                        <div class="valueInfo shadow">
+                                                            <div class="value">
+                                                                <p class="value">
+                                                                    ${{coupon.Price}}
+                                                                </p>
+                                                                <p class="text">
+                                                                    Value
+                                                                </p>
+                                                            </div>
+                                                            <div class="discount">
+                                                                <p class="value">
+                                                                    {{(coupon.Price - coupon.NewPrice )/coupon.Price * 100 | number:0}}%
+                                                                </p>
+                                                                <p class="text">
+                                                                    Discount
+                                                                </p>
+                                                            </div>
+                                                            <div class="save">
+                                                                <p class="value">
+                                                                    ${{coupon.Price - coupon.NewPrice}}
+                                                                </p>
+                                                                <p class="text">
+                                                                    SAVINGS
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </footer>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/.deal entry -->
+                                    </div>
+                                    <!--/wrap -->
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!--/.widget -->
+            <div class="widget">
+                <div class="box-icon">
+                    <div class="icon-wrap">
+                        <i class="ti-star">
+                        </i>
+                    </div>
+                </div>
+            </div>
+            <!--/.widget -->
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+
+
+
+

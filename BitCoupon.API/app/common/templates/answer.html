@@ -1,0 +1,31 @@
+﻿
+
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true" ng-controller="DetailsController as details">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="coup-titles">Answer</h3>
+            </div>
+            <div class="modal-body">
+                <div class="body-content">
+                    <div class="">
+
+                        <div ng-show="details.accountService.user.Role=='Seller'" class="commentsDiv">
+                            <form ng-submit="details.service.createAnswer()" novalidate style="padding-bottom: 5%;">
+                                <div class=" form-group">
+                                    <textarea placeholder="You answer goes here" class="coup-textarea-comment" ng-required="true" ng-maxlength="180" ng-model="details.service.answer">  </textarea>
+                                </div>
+                                <div style="text-align:center">
+                                    <input type="submit" class="btn btn-success btn-raised ripple-effect" style="width:19%;" value="Answer" />
+                                    <input type="button" class="btn close-button btn-raised ripple-effect" value="Cancel" ng-click="$hide()" />
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
